@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WMF 2026 – Hub</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #6aa843;
+    --green-dark: #588c37;
+    --navy: #022b3d;
+    --navy-light: #033d57;
+    --bg: #f4f6f9;
+    --text: #1a2340;
+    --muted: #4a5568;
+    --border: #dde3ef;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+    border-bottom: 2px solid var(--green);
+  }
+
+  .header-logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .header-logos img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .header-title {
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.85;
+    text-align: right;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green);
+    color: #fff;
+    text-align: center;
+    padding: 40px 32px 44px;
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: #e2efda;
+    letter-spacing: 1px;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: #fff;
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 32px;
+  }
+
+  .cards-label {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 28px 32px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.22s, transform 0.22s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--green);
+    opacity: 0;
+    transition: opacity 0.22s;
+  }
+
+  .card:hover {
+    box-shadow: 0 12px 36px rgba(26,35,64,0.14);
+    transform: translateY(-4px);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #f0f7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    flex-shrink: 0;
+  }
+
+  .card-icon svg { width: 38px; height: 38px; }
+
+  .card-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: clamp(17px, 2vw, 22px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 24px;
+  }
+
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: #fff;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: background 0.2s;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .card-btn:hover { background: var(--green-dark); }
+  .card-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: #fff;
+    padding: 20px 40px;
+    font-size: 12px;
+    line-height: 1.6;
+    border-top: 1px solid var(--navy-light);
+    flex-shrink: 0;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-text { color: #cbd5e1; }
+  .footer-text strong { color: #fff; }
+
+  .footer-logos { display: flex; gap: 12px; align-items: center; }
+  .footer-logos img { height: 28px; width: auto; object-fit: contain; }
+
+  /* ── LANDSCAPE TABLET: full-screen kiosk, no scroll ── */
+  @media (orientation: landscape) and (min-width: 900px) {
+    html, body { height: 100vh; overflow: hidden; }
+    header { padding: 10px 32px; }
+    .header-logos img { height: 36px; }
+    .hero { padding: 16px 32px 18px; }
+    .hero h1 { font-size: clamp(22px, 3vw, 34px); margin-bottom: 5px; }
+    .hero p { font-size: 13px; }
+    .hero-divider { margin: 8px auto 0; }
+    main {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 28px 10px;
+      justify-content: flex-start;
+    }
+    .cards-label { margin-bottom: 12px; font-size: 11px; }
+    .cards-grid {
+      flex: 1;
+      min-height: 0;
+      gap: 18px;
+      grid-template-rows: 1fr;
+      align-items: stretch;
+    }
+    .card { padding: 20px 18px 18px; border-radius: 16px; justify-content: flex-start; }
+    .card .card-desc { flex: 0; }
+    .card .card-btn { margin-top: auto; }
+    .card-icon { width: 56px; height: 56px; margin-bottom: 12px; }
+    .card-icon svg { width: 26px; height: 26px; }
+    .card-num { margin-bottom: 5px; }
+    .card-title { font-size: clamp(14px, 1.5vw, 18px); margin-bottom: 8px; }
+    .card-desc { font-size: 12px; line-height: 1.55; margin-bottom: 14px; }
+    .card-btn { padding: 10px 20px; font-size: 13px; }
+    footer { padding: 10px 32px; }
+    .footer-logos img { height: 20px; }
+    .footer-text { font-size: 11px; }
+  }
+
+  /* ── PORTRAIT TABLET ── */
+  @media (max-width: 900px) and (orientation: portrait) {
+    header { padding: 12px 20px; }
+    .header-logos img { height: 36px; }
+    .header-title { font-size: 12px; }
+    .hero { padding: 32px 20px 36px; }
+    main { padding: 32px 20px; }
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 700px;
+      gap: 20px;
+    }
+    .cards-grid .card:last-child {
+      grid-column: 1 / -1;
+      max-width: 360px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .card { padding: 32px 24px 28px; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 599px) {
+    header { padding: 10px 16px; }
+    .header-logos img { height: 30px; }
+    .header-title { font-size: 11px; letter-spacing: 1px; }
+    .hero { padding: 28px 16px 32px; }
+    main { padding: 28px 16px; }
+    .cards-grid { grid-template-columns: 1fr; max-width: 420px; gap: 16px; }
+    footer { padding: 16px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-logos">
+    <img src="wmf/r3_logo.png" alt="R3 Logo"/>
+    <img src="wmf/deep_blue_s_r_l__logo.jpeg" alt="Deep Blue Logo"/>
+  </div>
+  <div class="header-title">We Make Future 2026</div>
+</header>
+
+<div class="hero">
+  <h1>WMF 2026</h1>
+  <p>Seleziona l'esperienza che vuoi esplorare</p>
+  <div class="hero-divider"></div>
+</div>
+
+<main>
+  <p class="cards-label">Scegli un'esperienza</p>
+
+  <div class="cards-grid">
+
+    <!-- Card 1: WMF Experience -->
+    <a class="card" href="wmf/WeMakeFuture.html">
+      <div class="card-icon">
+        <!-- Globe/world icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6aa843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="card-num">01</div>
+      <div class="card-title">WMF Experience</div>
+      <div class="card-desc">Esplora gli scenari futuri delle aziende del progetto R3-MYDAS attraverso l'esperienza interattiva guidata.</div>
+      <span class="card-btn">
+        Accedi
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </span>
+    </a>
+
+    <!-- Card 2: Image Generation -->
+    <a class="card" href="https://imagegenhartu-front.onrender.com" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <!-- Image/sparkle icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6aa843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+      <div class="card-num">02</div>
+      <div class="card-title">Generatore di Immagini AI</div>
+      <div class="card-desc">Crea immagini personalizzate con l'intelligenza artificiale. Uno strumento generativo per visualizzare idee e scenari.</div>
+      <span class="card-btn">
+        Accedi
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </span>
+    </a>
+
+    <!-- Card 3: Skills Transformation Map -->
+    <a class="card" href="https://www.figma.com/proto/qNpE5vB0Gc3W06U67VrdXv/Skills-Transformation-Map---interattivo?node-id=2626-13701&p=f&m=draw&scaling=min-zoom&content-scaling=fixed&page-id=2626%3A460&starting-point-node-id=2626%3A13701" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <!-- Network/map icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6aa843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </div>
+      <div class="card-num">03</div>
+      <div class="card-title">Skills Transformation Map</div>
+      <div class="card-desc">Naviga la mappa interattiva delle competenze chiave per la trasformazione digitale del settore energetico.</div>
+      <span class="card-btn">
+        Accedi
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">
+      <strong>R3-MYDAS</strong> – Reskilling &amp; Resilience for Renewable Energy Workforce<br/>
+      Funded by the European Union · NextGenerationEU
+    </div>
+    <div class="footer-logos">
+      <img src="wmf/eu_funding_logo.png" alt="EU Funding"/>
+      <img src="wmf/grant_authority_logo.png" alt="Grant Authority"/>
+      <img src="wmf/r3_logo.png" alt="R3"/>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

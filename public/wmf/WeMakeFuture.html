@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>We Make Future 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2340;min-height:100vh;}
+
+/* ── SHARED ── */
+.page{display:none;min-height:100vh;flex-direction:column;}
+.page.active{display:flex;}
+
+.sticky-header{background:#6aa843;color:#fff;padding:18px 40px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:1000;}
+.back-btn{background:transparent;border:none;color:#fff;cursor:pointer;font-size:13px;letter-spacing:.5px;padding:6px 4px;}
+.back-btn:hover{opacity:.7;}
+.breadcrumb{font-size:13px;color:#e2efda;}
+
+footer{background:#022b3d;color:#fff;padding:32px 40px;font-size:12px;line-height:1.6;border-top:1px solid #033d57;margin-top:auto;}
+.footer-container{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.footer-text{flex:1;min-width:280px;color:#cbd5e1;}
+.footer-text strong{color:#fff;}
+.footer-logos{display:flex;gap:12px;align-items:center;flex-shrink:0;}
+.footer-logos img{height:35px;width:auto;object-fit:contain;}
+
+/* ── LANDING ── */
+#landing header{background:#6aa843;color:#fff;text-align:center;padding:0 0 48px;position:relative;}
+.header-logo-container{background:#022b3d;padding:12px 40px;margin-bottom:40px;border-bottom:1px solid #033d57;}
+#landing header h1{font-size:40px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:#fff;}
+#landing header p{font-size:16px;color:#e2efda;letter-spacing:1px;}
+.divider{width:60px;height:3px;background:#fff;margin:18px auto 0;border-radius:2px;}
+
+/* Container principale per le sezioni descrittive */
+.project-intro-container{max-width:1200px;margin:48px auto 24px;padding:0 32px;display:flex;flex-direction:column;gap:40px;}
+
+/* Layout orizzontale: immagine/logo a sinistra, testo a destra */
+.intro-row{display:flex;gap:40px;align-items:center;}
+
+/* Blocco per l'immagine/logo a sinistra strutturato a contenitore */
+.intro-image-wrap{flex-shrink:0;width:250px;text-align:center;display:flex;justify-content:center;align-items:center;}
+.intro-image-wrap img{width:100%;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.05);border:1px solid #dde3ef;background:#fff;}
+
+/* Padding specifico interno per il logo dbl per farlo respirare dentro lo stesso contenitore */
+.intro-image-wrap img.logo-inside-container {
+  padding: 16px;
+  object-fit: contain;
+}
+
+/* Blocco per il testo a destra */
+.intro-desc-wrap{flex:1;}
+.intro-desc-wrap h2{font-size:28px;color:#1a2340;margin-bottom:16px;}
+.intro-desc-wrap p{font-size:16px;line-height:1.8;color:#4a5568;}
+
+/* Pulsanti link esterni */
+.intro-link-btn{display:inline-block;margin-top:16px;background:#6aa843;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600;transition:background .2s,transform .2s;border:none;cursor:pointer;}
+.intro-link-btn:hover{background:#588c37;transform:translateY(-1px);}
+
+.section-headline{max-width:1200px;margin:48px auto 0;padding:0 32px;font-size:24px;font-weight:700;color:#1a2340;text-transform:capitalize;}
+.landing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:20px auto 48px;padding:0 32px;flex:1;}
+
+@media(max-width:768px){
+  .intro-row{flex-direction:column;align-items:stretch;gap:20px;}
+  .intro-image-wrap{width:100%;max-width:250px;margin:0 auto;}
+  .landing-grid{grid-template-columns:1fr;}
+}
+
+.company-card{background:#fff;border-radius:20px;border:1px solid #dde3ef;padding:32px 28px 36px;text-align:center;cursor:pointer;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;}
+.company-card:hover{box-shadow:0 8px 28px rgba(26,35,64,.12);transform:translateY(-3px);}
+.company-card .logo-wrap{width:100%;background:#f4f6f9;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:24px;margin-bottom:22px;min-height:200px;}
+.company-card img.logo{width:100%;max-width:220px;height:160px;object-fit:contain;}
+.company-card .cname{font-size:22px;font-weight:700;color:#1a2340;margin-bottom:8px;}
+.company-card .csub{font-size:13px;color:#9ba8c0;}
+
+/* ── COMPANY HUB ── */
+#hub-body{max-width:900px;margin:50px auto;padding:0 32px;flex:1;}
+.hub-interaction{text-align:center;max-width:800px;margin:0 auto;}
+.hub-avatar-wrap{margin-bottom:24px;display:inline-block;}
+.hub-avatar-wrap img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #6aa843;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.08);}
+.hub-question-panel{background:#fff;border-radius:16px;border:1px solid #dde3ef;padding:32px 24px;margin-bottom:32px;box-shadow:0 4px 12px rgba(0,0,0,0.033);}
+.hub-question-panel h3{font-size:24px;font-weight:700;color:#1a2340;line-height:1.4;}
+.hub-btn-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.hub-choice-btn{background:#fff;border-radius:16px;border:1px solid #dde3ef;padding:40px 32px;text-align:center;cursor:pointer;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+.hub-choice-btn:hover{box-shadow:0 12px 32px rgba(26,35,64,.12);transform:translateY(-4px);border-color:#6aa843;}
+.hub-choice-btn .hc-icon{font-size:44px;margin-bottom:8px;}
+.hub-choice-btn .hub-btn-label{font-size:16px;font-weight:600;color:#1a2340;line-height:1.5;}
+
+/* ── DISCOVER ── */
+#discover-body{max-width:900px;margin:48px auto;padding:0 32px;flex:1;}
+.discover-card{background:#fff;border-radius:12px;border:1px solid #dde3ef;padding:40px;line-height:1.9;font-size:15px;color:#333;}
+.discover-card h2{font-size:28px;font-weight:700;color:#1a2340;margin-bottom:20px;}
+.discover-card h3{font-size:20px;font-weight:700;color:#1a2340;margin:32px 0 12px;}
+.discover-card h3:first-of-type{margin-top:0;}
+
+/* ── TRANSITION & RESTRUCTURED GRID ── */
+#transition-body{max-width:1200px;margin:48px auto;padding:0 32px 60px;flex:1;}
+.page-main-title{font-size:32px;font-weight:700;color:#1a2340;margin-bottom:32px;border-bottom:3px solid #6aa843;padding-bottom:12px;}
+
+/* Future Storyboard Intro Full-Length Row Layout */
+.future-storyboard-intro-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #dde3ef;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+.future-storyboard-intro-row img {
+  width: 320px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #dde3ef;
+  flex-shrink: 0;
+}
+.future-storyboard-intro-text {
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #4a5568;
+}
+
+@media(max-width: 768px) {
+  .future-storyboard-intro-row { flex-direction: column; align-items: stretch; gap: 20px; padding: 20px; }
+  .future-storyboard-intro-row img { width: 100%; height: 180px; }
+}
+
+/* Horizontal 3-column step cards grid */
+.future-storyboard-grid {display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-bottom:48px;}
+@media(max-width:992px){ .future-storyboard-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:650px){ .future-storyboard-grid{grid-template-columns:1fr;} }
+
+.workflow-step{display:flex;flex-direction:column;gap:12px;background:#fff;border-radius:12px;border:1px solid #dde3ef;padding:20px;}
+.workflow-step img{width:100%;height:160px;object-fit:cover;border-radius:8px;border:1px solid #dde3ef;}
+.workflow-meta{display:flex;align-items:center;gap:12px;}
+
+/* Universal Step Badge Styles */
+.workflow-step .ws-num{font-size:14px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0;}
+/* Future: Green scheme */
+.workflow-step .ws-num.future-theme{background:#e2efda;color:#6aa843;}
+.workflow-step .ws-text{font-size:14px;color:#333;line-height:1.5;}
+
+/* Overview image section - pointer setup to imply it can be enlarged */
+.overview-image-container{background:transparent;text-align:center;margin-bottom:48px;}
+.overview-image-container img{width:100%;max-width:900px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.05);cursor:pointer;transition:transform 0.2s, box-shadow 0.2s;}
+.overview-image-container img:hover{transform:scale(1.01);box-shadow:0 6px 24px rgba(26,35,64,0.12);}
+
+/* ── LIGHTBOX GRAPHIC OVERLAY ── */
+#image-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:3000;align-items:center;justify-content:center;padding:20px;}
+#image-lightbox.open{display:flex;}
+.lightbox-content{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,0.5);}
+.lightbox-close{position:absolute;top:24px;right:32px;background:transparent;border:none;color:#fff;font-size:36px;cursor:pointer;line-height:1;transition:opacity 0.2s;}
+.lightbox-close:hover{opacity:0.7;}
+
+.personas-section-desc{font-size:16px;color:#4a5568;line-height:1.7;margin:-8px 0 24px 0;max-width:800px;}
+.personas-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;margin-bottom:12px;}
+@media(max-width:850px){ .personas-grid{grid-template-columns:1fr 1fr; } }
+@media(max-width:550px){ .personas-grid{grid-template-columns:1fr; } }
+.persona-chip{background:#fff;border:1px solid #dde3ef;border-radius:14px;padding:28px 24px;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:box-shadow .2s,transform .2s;box-shadow:0 4px 10px rgba(0,0,0,0.02);width:100%;min-width:unset;}
+.persona-chip:hover{box-shadow:0 8px 24px rgba(26,35,64,.12);transform:translateY(-4px);border-color:#6aa843;}
+.persona-chip img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #dde3ef;}
+.persona-chip .pc-name{font-size:18px;font-weight:700;color:#1a2340;}
+.persona-chip .pc-role{font-size:13px;color:#718096;margin-top:2px;line-height:1.4;}
+.section-title{font-size:24px;font-weight:700;color:#1a2340;margin:48px 0 16px;padding-bottom:8px;border-bottom:2px solid #1a2340;}
+
+/* ── PERSONA MODAL ── */
+#persona-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;overflow-y:auto;}
+#persona-modal.open{display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;}
+.modal-box{background:#fff;border-radius:16px;max-width:860px;width:100%;box-shadow:0 16px 60px rgba(0,0,0,.25);overflow:hidden;}
+.modal-header{background:#1a2340;color:#fff;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;}
+.modal-header .mh-name{font-size:22px;font-weight:700;}
+.modal-header .mh-role{font-size:13px;color:#9ba8c0;margin-top:4px;}
+.modal-close{background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;}
+.modal-tabs{display:flex;border-bottom:2px solid #dde3ef;padding:0 28px;background:#fff;}
+.mtab{padding:14px 22px;font-size:14px;font-weight:600;color:#9ba8c0;background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;margin-bottom:-2px;}
+.mtab.active{color:#1a2340;border-bottom-color:#4a7fd4;}
+.modal-body{padding:28px;}
+.modal-tab-content{display:none;}
+.modal-tab-content.active{display:block;}
+.persona-hero{display:flex;align-items:center;gap:24px;margin-bottom:24px;}
+.persona-hero img{width:100px;height:100px;border-radius:50%;border:3px solid #dde3ef;object-fit:cover;flex-shrink:0;}
+.pcard{background:#f8f9fc;border-radius:10px;border:1px solid #dde3ef;padding:20px;margin-bottom:16px;}
+.pcard.green{background:#f2f8ee;border-color:#c3dba8;}
+.pcard h3{font-size:14px;font-weight:700;color:#1a2340;margin-bottom:12px;}
+.pcard ul,.pcard ol{padding-left:18px;}
+.pcard li{font-size:13px;color:#333;line-height:1.7;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.scenario-text{font-size:14px;line-height:1.9;color:#333;}
+.gauge-wrap{text-align:center;padding:8px 0;}
+.gauge-label{font-size:20px;font-weight:700;color:#1a2340;margin-top:6px;}
+.border-chart{margin-top:8px;}
+.bar-row{display:flex;align-items:center;margin-bottom:9px;gap:8px;}
+.bar-label{font-size:11px;color:#555;width:130px;text-align:right;flex-shrink:0;line-height:1.3;}
+.bars{flex:1;}
+.bar-bg{background:#e8ede4;border-radius:3px;height:10px;width:100%;position:relative;overflow:hidden;}
+.bar-fill-cur{background:#5a8a2e;border-radius:3px;height:10px;position:absolute;left:0;top:0;}
+.bar-fill-inc{background:#a8cc70;border-radius:3px;height:10px;position:absolute;top:0;}
+.legend{display:flex;gap:16px;margin-bottom:10px;}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:#555;}
+.leg-dot{width:12px;height:10px;border-radius:2px;}
+</style>
+</head>
+<body>
+
+<div id="landing" class="page active">
+  <header>
+    <div class="header-logo-container">
+      <div style="max-width:1200px; margin:0 auto; text-align:left;">
+        <img src="r3_logo.png" alt="Project Logo" style="height:40px; object-fit:contain; vertical-align:middle;"/>
+      </div>
+    </div>
+    <div class="header-content">
+      <h1>Una visione dell'industria del domani</h1>
+      <p>Le innovazioni di R3-Mydas a We Make Future 2026</p>
+      <div class="divider"></div>
+    </div>
+  </header>
+
+  <h2 class="section-headline">Scopri il cambiamento</h2>
+
+  <div class="landing-grid">
+    <div class="company-card" onclick="openHub('revgear')">
+      <div class="logo-wrap"><img class="logo" src="revgearsolutions_logo.png" alt="Components remanufacturing for oil and gas sectors"/></div>
+      <div class="cname">Remanufacturing di componenti per il settore oil and gas</div>
+    </div>
+    <div class="company-card" onclick="openHub('turbinecare')">
+      <div class="logo-wrap"><img class="logo" src="turbinecare_logo.png" alt="A circular model for the wind industry"/></div>
+      <div class="cname">Un modello circolare per l'industria eolica</div>
+    </div>
+    <div class="company-card" onclick="openHub('voltcell')">
+      <div class="logo-wrap"><img class="logo" src="voltcell_logo.png" alt="Reuse and repurpose of electric vehicles batteries"/></div>
+      <div class="cname">Una seconda vita per le batterie dei veicoli elettrici</div>
+    </div>
+  </div>
+
+  <div class="project-intro-container">
+    <section class="intro-row">
+      <div class="intro-image-wrap">
+        <img src="project_overview.png" alt="Project Overview Image"/>
+      </div>
+      <div class="intro-desc-wrap">
+        <h2>R3-MYDAS contribuisce ad accelerare la transizione nel settore manifatturiero</h2>
+ <p>Il progetto si concentra sullo sviluppo di un framework multi-attore che integra tecnologie digitali sostenibili ed innovative, meccatronica avanzata e nuovi approcci di design incentrati sulla persona.</p>
+         <div style="text-align: right;">
+          <a href="https://r3-mydas.eu/" target="_blank" class="intro-link-btn">Visit R3-Mydas Website</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="intro-image-wrap">
+        <img src="deep_blue_s_r_l__logo.jpeg" alt="DBL Logo" class="logo-inside-container"/>
+      </div>
+      <div class="intro-desc-wrap">
+        <h2>Il ruolo di Deep Blue nel progetto</h2>
+        <p>In questo progetto, ci occupiamo dell'<b>analisi della forza lavoro</b> per anticipare le future competenze che i lavoratori necesiteranno per rispondere all'introduzione delle tecnologie sviluppate in R3-Mydas. Utilizziamo strumenti quali: personas, scenari, artefatti dal futuro ed un framework sviluppato appositamente - la skills transformation map - per studiare le persone ed assicurare che le tecnologie siano costruite sulla base delle loro necessità. 
+           Ci occupiamo inoltre dell'<b>assessment etico</b>, assicurando la conformità ai requisiti etici e legali dei casi studio presenti nel progetto.</p>
+        <div style="text-align: right;">
+          <a href="https://dblue.it/en/" target="_blank" class="intro-link-btn">Visit Deep Blue Website</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <span style="display:block; margin-bottom:12px; font-style:italic; color:#9ba8c0; font-size:11px;">
+          All visual assets on this website have been generated using AI.
+        </span>
+        Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.<br/>
+        <strong>Project Number: 101138738.</strong>
+      </div>
+      <div class="footer-logos">
+        <img src="eu_funding_logo.png" alt="EU Funding Logo"/>
+        <img src="grant_authority_logo.png" alt="Granting Authority Logo"/>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="hub" class="page">
+  <div class="sticky-header">
+    <button class="back-btn" onclick="goTo('landing')">&#8592; Back</button>
+    <span class="breadcrumb" id="hub-breadcrumb"></span>
+  </div>
+  <div id="hub-body">
+    <div class="hub-interaction">
+      <div class="hub-avatar-wrap">
+        <img src="avatar_guide.png" alt="Digital Guide Avatar"/>
+      </div>
+      <div class="hub-question-panel">
+        <h3 id="hub-question-text">Che cosa vuoi scoprire?</h3>
+      </div>
+      <div class="hub-btn-wrap">
+        <div class="hub-choice-btn" onclick="openDiscover()">
+          <div class="hc-icon">🏢</div>
+          <div class="hub-btn-label">Dimmi di più su questo settore</div>
+        </div>
+        <div class="hub-choice-btn" onclick="openTransition()">
+          <div class="hc-icon">🧠</div>
+          <div class="hub-btn-label">Dai uno sguardo ai risultati</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <span style="display:block; margin-bottom:12px; font-style:italic; color:#9ba8c0; font-size:11px;">
+          All visual assets on this website have been generated using AI.
+        </span>
+        Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.<br/>
+        <strong>Project Number: 101138738.</strong>
+      </div>
+      <div class="footer-logos">
+        <img src="eu_funding_logo.png" alt="EU Funding Logo"/>
+        <img src="grant_authority_logo.png" alt="Granting Authority Logo"/>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="discover" class="page">
+  <div class="sticky-header">
+    <button class="back-btn" onclick="goTo('hub')">&#8592; Back</button>
+    <span class="breadcrumb" id="discover-breadcrumb"></span>
+  </div>
+  <div id="discover-body">
+    <div class="discover-card">
+      <h2 id="discover-title"></h2>
+      <div id="discover-content"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <span style="display:block; margin-bottom:12px; font-style:italic; color:#9ba8c0; font-size:11px;">
+          All visual assets on this website have been generated using AI.
+        </span>
+        Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.<br/>
+        <strong>Project Number: 101138738.</strong>
+      </div>
+      <div class="footer-logos">
+        <img src="eu_funding_logo.png" alt="EU Funding Logo"/>
+        <img src="grant_authority_logo.png" alt="Granting Authority Logo"/>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="transition" class="page">
+  <div class="sticky-header">
+    <button class="back-btn" onclick="goTo('hub')">&#8592; Back</button>
+    <span class="breadcrumb" id="transition-breadcrumb"></span>
+  </div>
+  <div id="transition-body">
+    <h1 class="page-main-title">La trasformazione della forza lavoro</h1>
+    
+    <div id="future-storyboard-intro-container"></div>
+    
+    <div class="future-storyboard-grid" id="future-storyboard"></div>
+
+    <h2 class="section-title">Una panoramica sull'ecosistema della fabbrica del futuro</h2>
+    <div class="overview-image-container">
+      <img id="dynamic-overview-img" src="" alt="The future ecosystem at a glance" onclick="zoomImage(this.src)"/>
+    </div>
+    
+    <h2 class="section-title">Scopri la forza lavoro del futuro</h2>
+    <p class="personas-section-desc">Scopri i ruoli chiave che guidano questa transizione. Clicca su ciascuna scheda per visualizzare il loro profilo, le competenze acquisite e da acquisire, le mansioni quotidiane e come le innovazioni portate dal progetto stanno ridefinendo i loro ruoli operativi.</p>
+    
+    <div class="personas-grid" id="personas-grid"></div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <span style="display:block; margin-bottom:12px; font-style:italic; color:#9ba8c0; font-size:11px;">
+          All visual assets on this website have been generated using AI.
+        </span>
+        Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.<br/>
+        <strong>Project Number: 101138738.</strong>
+      </div>
+      <div class="footer-logos">
+        <img src="eu_funding_logo.png" alt="EU Funding Logo"/>
+        <img src="grant_authority_logo.png" alt="Granting Authority Logo"/>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="image-lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged workspace view" onclick="event.stopPropagation()"/>
+</div>
+
+<div id="persona-modal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <div class="mh-name" id="modal-name"></div>
+        <div class="mh-role" id="modal-role"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="mtab active" onclick="switchMTab('mtab-profile',this)">Profile</button>
+      <button class="mtab" onclick="switchMTab('mtab-scenario',this)">A day at work</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tab-content active" id="mtab-profile"></div>
+      <div class="modal-tab-content" id="mtab-scenario"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentCompany = null;
+
+// FLOWCHART FLOW DIAGRAMS EXTRACTED FROM INPUT FILE
+var svgAlex = '<svg width="100%" viewBox="0 0 680 450" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="80" y="20" width="520" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="42" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">01</text><text x="132" y="42" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Confirm crankshaft ID and restoration requirements against the repair order</text><line x1="340" y1="64" x2="340" y2="84" stroke="#aaa" stroke-width="1.5" marker-end="url(#arr)"/><rect x="80" y="84" width="520" height="44" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="108" y="106" font-family="sans-serif" font-size="11" font-weight="600" fill="#3C3489" dominant-baseline="central">02</text><text x="132" y="106" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489" dominant-baseline="central">Scan damaged areas to generate a point cloud and subsequent CAD model</text><line x1="340" y1="128" x2="340" y2="148" stroke="#aaa" stroke-width="1.5" marker-end="url(#arr)"/><rect x="80" y="148" width="520" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="108" y="170" font-family="sans-serif" font-size="11" font-weight="600" fill="#0C447C" dominant-baseline="central">03</text><text x="132" y="170" font-family="sans-serif" font-size="13" font-weight="500" fill="#0C447C" dominant-baseline="central">Define cladding layers and deposition paths, then verify via digital simulation</text><line x1="340" y1="192" x2="340" y2="212" stroke="#aaa" stroke-width="1.5" marker-end="url(#arr)"/><rect x="80" y="212" width="520" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="108" y="234" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" dominant-baseline="central">04</text><text x="132" y="234" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" dominant-baseline="central">Pre-heat the crankshaft and verify powder/gas supply levels</text><line x1="340" y1="256" x2="340" y2="276" stroke="#aaa" stroke-width="1.5" marker-end="url(#arr)"/><rect x="80" y="276" width="520" height="44" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="108" y="298" font-family="sans-serif" font-size="11" font-weight="600" fill="#4A1B0C" dominant-baseline="central">05</text><text x="132" y="298" font-family="sans-serif" font-size="13" font-weight="500" fill="#4A1B0C" dominant-baseline="central">Initiate program while monitoring melt pool and system metrics for deviations</text><line x1="340" y1="320" x2="340" y2="340" stroke="#aaa" stroke-width="1.5" marker-end="url(#arr)"/><rect x="80" y="340" width="520" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="362" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">06</text><text x="132" y="362" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Conduct visual quality check for defects before moving the part to cooling</text></svg>';
+
+var svgJordan = '<svg width="100%" viewBox="0 0 680 620" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrJ" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="80" y="20" width="520" height="54" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="42" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">01</text><text x="132" y="40" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Analyze maintenance dashboard</text><text x="132" y="58" font-family="sans-serif" font-size="12" fill="#0F6E56" dominant-baseline="central">Identify sensor anomalies and data trends</text><line x1="340" y1="74" x2="340" y2="94" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="94" width="520" height="44" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="108" y="116" font-family="sans-serif" font-size="11" font-weight="600" fill="#3C3489" dominant-baseline="central">02</text><text x="132" y="116" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489" dominant-baseline="central">Receive an alert</text><line x1="340" y1="138" x2="340" y2="158" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="158" width="520" height="54" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="108" y="178" font-family="sans-serif" font-size="11" font-weight="600" fill="#0C447C" dominant-baseline="central">03</text><text x="132" y="178" font-family="sans-serif" font-size="13" font-weight="500" fill="#0C447C" dominant-baseline="central">Secure a production window</text><text x="132" y="196" font-family="sans-serif" font-size="12" fill="#185FA5" dominant-baseline="central">Intervene and prevent potential hardware failure</text><line x1="340" y1="212" x2="340" y2="232" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="232" width="520" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="108" y="254" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" dominant-baseline="central">04</text><text x="132" y="254" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" dominant-baseline="central">Move to the plant floor</text><line x1="340" y1="276" x2="340" y2="296" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="296" width="520" height="54" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="108" y="316" font-family="sans-serif" font-size="11" font-weight="600" fill="#4A1B0C" dominant-baseline="central">05</text><text x="132" y="316" font-family="sans-serif" font-size="13" font-weight="500" fill="#4A1B0C" dominant-baseline="central">Execute mechatronic test procedures</text><text x="132" y="334" font-family="sans-serif" font-size="12" fill="#993C1D" dominant-baseline="central">Validate sensors and update robotic arm configurations</text><line x1="340" y1="350" x2="340" y2="370" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="370" width="520" height="54" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="108" y="390" font-family="sans-serif" font-size="11" font-weight="600" fill="#3C3489" dominant-baseline="central">06</text><text x="132" y="390" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489" dominant-baseline="central">Run robotic simulation</text><text x="132" y="408" font-family="sans-serif" font-size="12" fill="#534AB7" dominant-baseline="central">Verify new prototype parameters and collision-free paths</text><line x1="340" y1="424" x2="340" y2="444" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="444" width="520" height="54" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="108" y="464" font-family="sans-serif" font-size="11" font-weight="600" fill="#0C447C" dominant-baseline="central">07</text><text x="132" y="464" font-family="sans-serif" font-size="13" font-weight="500" fill="#0C447C" dominant-baseline="central">Adjust human-robot collaborative field scanners</text><text x="132" y="482" font-family="sans-serif" font-size="12" fill="#185FA5" dominant-baseline="central">Ensure a safe shared workspace for operators</text><line x1="340" y1="498" x2="340" y2="518" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="80" y="518" width="520" height="54" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="538" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">08</text><text x="132" y="538" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Log calibrations and software updates</text><text x="132" y="556" font-family="sans-serif" font-size="12" fill="#0F6E56" dominant-baseline="central">Maintenance records updated for digital traceability</text></svg>';
+
+var svgElena = '<svg width="100%" viewBox="0 0 680 760" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrL" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrG" viewBox="0 0 10 10" refX="8" font-size="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="80" y="20" width="520" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="42" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">01</text><text x="132" y="42" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Access regulatory dashboard to check material regulations</text><line x1="340" y1="64" x2="340" y2="88" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrL)"/><polygon points="340,88 490,136 340,184 190,136" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="136" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" text-anchor="middle" dominant-baseline="central">New restriction?</text><text x="498" y="155" font-family="sans-serif" font-size="11" fill="#534AB7" font-weight="600">YES</text><text x="138" y="155" font-family="sans-serif" font-size="11" fill="#0F6E56" font-weight="600">NO</text><polyline points="490,136 565,136 565,210" fill="none" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrR)"/><polyline points="190,136 110,136 110,210" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="210" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="229" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Collaborate with operators</text><line x1="110" y1="248" x2="110" y2="266" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="266" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="285" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Support trial production runs</text><line x1="110" y1="304" x2="110" y2="322" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="322" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="341" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Analyze defects and root causes</text><line x1="110" y1="360" x2="110" y2="378" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="378" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="397" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Guide machine reprogramming</text><line x1="110" y1="416" x2="110" y2="434" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="434" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="453" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Integrate into production schedule</text><line x1="110" y1="472" x2="110" y2="490" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="20" y="490" width="185" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="112" y="509" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Ensure workflow compliance</text><rect x="472" y="210" width="185" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="564" y="229" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Gap analysis on alternatives</text><line x1="565" y1="248" x2="565" y2="266" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="472" y="266" width="185" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="564" y="285" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Meeting with boss for approval</text><line x1="565" y1="304" x2="565" y2="322" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="472" y="322" width="185" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="564" y="341" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Evaluate environmental impacts</text><line x1="565" y1="360" x2="565" y2="378" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="472" y="378" width="185" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="564" y="285" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Assess health and safety compliance</text><line x1="565" y1="416" x2="565" y2="434" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="472" y="434" width="185" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="564" y="453" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Communicate to engineering team</text><polyline points="110,528 110,580 340,580" fill="none" stroke="#aaa" stroke-width="1"/><polyline points="565,472 565,580 340,580" fill="none" stroke="#aaa" stroke-width="1"/><line x1="340" y1="580" x2="340" y2="604" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrL)"/><rect x="80" y="604" width="520" height="38" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="108" y="623" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" dominant-baseline="central">02</text><text x="132" y="623" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" dominant-baseline="central">Document any relevant findings</text><line x1="340" y1="642" x2="340" y2="660" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrL)"/><rect x="80" y="660" width="520" height="38" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="108" y="679" font-family="sans-serif" font-size="11" font-weight="600" fill="#4A1B0C" dominant-baseline="central">03</text><text x="132" y="679" font-family="sans-serif" font-size="13" font-weight="500" fill="#4A1B0C" dominant-baseline="central">Organize data for audits and certification</text></svg>';
+
+var svgSam = '<svg width="100%" viewBox="0 0 680 720" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrS" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrST" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="180" y="20" width="320" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="40" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Access monitoring dashboard</text><line x1="340" y1="60" x2="340" y2="80" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrS)"/><rect x="180" y="80" width="320" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="100" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Review real-time sensor data</text><line x1="340" y1="120" x2="340" y2="140" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrS)"/><polygon points="340,140 460,180 340,220 220,180" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="180" font-family="sans-serif" font-size="12" font-weight="600" fill="#633806" text-anchor="middle" dominant-baseline="central">Anomaly detected?</text><text x="465" y="175" font-family="sans-serif" font-size="11" fill="#534AB7" font-weight="700">YES</text><polyline points="460,180 540,180 540,240" fill="none" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="240" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="259" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Analyze gearbox signals with AI models</text><line x1="540" y1="278" x2="540" y2="300" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="300" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="319" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Remote diagnostic &amp; degradation analysis</text><line x1="540" y1="338" x2="540" y2="360" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="360" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="379" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Estimate remaining useful lifetime</text><line x1="540" y1="398" x2="540" y2="420" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="420" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="439" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Decide maintenance timing</text><line x1="540" y1="458" x2="540" y2="480" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="480" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="499" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Communicate plan to client</text><line x1="540" y1="518" x2="540" y2="540" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="415" y="540" width="250" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="540" y="559" font-family="sans-serif" font-size="11" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">Share insights with disassembly team</text><line x1="578" y1="540" x2="540" y2="610" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><polyline points="540,610 340,610 340,630" fill="none" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrST)"/><rect x="180" y="630" width="320" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="650" font-family="sans-serif" font-size="13" font-weight="600" fill="#085041" text-anchor="middle" dominant-baseline="central">Update AI model with new data</text><polyline points="220,180 100,180 100,60 180,60" fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrS)"/><text x="100" y="165" font-family="sans-serif" font-size="10" fill="#999" text-anchor="middle"><tspan x="100" dy="0">NO (continue monitoring</tspan><tspan x="100" dy="12">and other activities)</tspan></text></svg>';
+
+var svgAvery = '<svg width="100%" viewBox="0 0 680 660" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrAG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrAR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="80" y="20" width="520" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="42" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">01</text><text x="132" y="42" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Receive notification of offshore turbine failure</text><line x1="340" y1="64" x2="340" y2="84" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><rect x="80" y="84" width="520" height="44" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="108" y="106" font-family="sans-serif" font-size="11" font-weight="600" fill="#3C3489" dominant-baseline="central">02</text><text x="132" y="106" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489" dominant-baseline="central">Check AI-generated transport strategy</text><line x1="340" y1="128" x2="340" y2="152" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><polygon points="340,152 470,196 340,240 210,196" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="196" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" text-anchor="middle" dominant-baseline="central">Satisfied?</text><text x="478" y="215" font-family="sans-serif" font-size="11" fill="#0F6E56" font-weight="600">YES</text><text x="154" y="215" font-family="sans-serif" font-size="11" fill="#993C1D" font-weight="600">NO</text><polyline points="470,196 550,196 550,270" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrAG)"/><rect x="460" y="270" width="175" height="38" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="548" y="289" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Forward to logistics team</text><polyline points="210,196 110,196 110,270" fill="none" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrAR)"/><rect x="25" y="270" width="175" height="38" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="113" y="289" font-family="sans-serif" font-size="11" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Manual adjustments</text><line x1="110" y1="308" x2="110" y2="326" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrAR)"/><rect x="25" y="326" width="175" height="38" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="113" y="345" font-family="sans-serif" font-size="11" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Forward to logistics team</text><polyline points="110,364 110,384 340,384" fill="none" stroke="#aaa" stroke-width="1"/><polyline points="548,308 548,384 340,384" fill="none" stroke="#aaa" stroke-width="1"/><line x1="340" y1="384" x2="340" y2="404" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><rect x="80" y="404" width="520" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="108" y="426" font-family="sans-serif" font-size="11" font-weight="600" fill="#0C447C" dominant-baseline="central">03</text><text x="132" y="426" font-family="sans-serif" font-size="13" font-weight="500" fill="#0C447C" dominant-baseline="central">Analyse disassembly planning to detect bottlenecks</text><line x1="340" y1="448" x2="340" y2="468" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><rect x="80" y="468" width="520" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="108" y="490" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" dominant-baseline="central">04</text><text x="132" y="490" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" dominant-baseline="central">Coordinate with Maintenance Engineers</text><line x1="340" y1="512" x2="340" y2="532" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><rect x="80" y="546" width="520" height="44" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="108" y="554" font-family="sans-serif" font-size="11" font-weight="600" fill="#4A1B0C" dominant-baseline="central">05</text><text x="132" y="554" font-family="sans-serif" font-size="13" font-weight="500" fill="#4A1B0C" dominant-baseline="central">Assess risk factors and legal requirements</text><line x1="340" y1="576" x2="340" y2="596" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrA)"/><rect x="80" y="596" width="520" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="618" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">06</text><text x="132" y="618" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Schedule crankshaft re-delivery to the client</text></svg>';
+
+var svgLara = '<svg width="100%" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrL" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="80" y="20" width="520" height="46" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="108" y="43" font-family="sans-serif" font-size="11" font-weight="600" fill="#085041" dominant-baseline="central">01</text><text x="132" y="43" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041" dominant-baseline="central">Connecting SoH diagnostic tool to the vehicle</text><line x1="340" y1="66" x2="340" y2="90" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrL)"/><rect x="80" y="90" width="520" height="46" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="108" y="113" font-family="sans-serif" font-size="11" font-weight="600" fill="#3C3489" dominant-baseline="central">02</text><text x="132" y="113" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489" dominant-baseline="central">Perform SoH test without disassembly</text><line x1="340" y1="136" x2="340" y2="160" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrL)"/><polygon points="340,160 480,208 340,256 200,208" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="208" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806" text-anchor="middle" dominant-baseline="central">Issue present?</text><text x="496" y="228" font-family="sans-serif" font-size="11" fill="#993C1D" font-weight="600">YES</text><text x="148" y="228" font-family="sans-serif" font-size="11" fill="#0F6E56" font-weight="600">NO</text><polyline points="480,208 555,208 555,290" fill="none" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrR)"/><polyline points="200,208 120,208 120,290" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="30" y="290" width="190" height="46" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="125" y="307" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Meet car owner: explain</text><text x="125" y="323" font-family="sans-serif" font-size="11" fill="#0F6E56" text-anchor="middle" dominant-baseline="central">no issues identified</text><line x1="120" y1="336" x2="120" y2="360" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrG)"/><rect x="30" y="360" width="190" height="46" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="125" y="383" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Give the car back to the owner</text><rect x="455" y="290" width="190" height="46" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="550" y="307" font-family="sans-serif" font-size="11" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Meet car owner: explain</text><text x="550" y="323" font-family="sans-serif" font-size="11" fill="#993C1D" text-anchor="middle" dominant-baseline="central">expedition to workshop</text><line x1="555" y1="336" x2="555" y2="360" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="455" y="360" width="190" height="46" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="550" y="383" font-family="sans-serif" font-size="11" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Remove battery from the car</text><line x1="555" y1="406" x2="555" y2="430" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrR)"/><rect x="455" y="430" width="190" height="46" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="550" y="453" font-family="sans-serif" font-size="11" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Send battery to workshop</text></svg>';
+
+var svgJan = '<svg width="100%" viewBox="0 0 680 880" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrJ" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrJG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrJR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrApp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="190" y="10" width="300" height="34" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="340" y="27" font-family="sans-serif" font-size="12" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">View preliminary (high-level) report</text><line x1="340" y1="44" x2="340" y2="60" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="190" y="60" width="300" height="34" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="340" y="77" font-family="sans-serif" font-size="12" font-weight="500" fill="#0C447C" text-anchor="middle" dominant-baseline="central">Disassemble battery pack</text><line x1="340" y1="94" x2="340" y2="110" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="190" y="110" width="300" height="34" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="340" y="127" font-family="sans-serif" font-size="12" font-weight="500" fill="#0C447C" text-anchor="middle" dominant-baseline="central">Access individual modules and cells</text><line x1="340" y1="144" x2="340" y2="160" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="190" y="160" width="300" height="55" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="178" font-family="sans-serif" font-size="12" font-weight="600" fill="#633806" text-anchor="middle">Perform cell-level testing:</text><text x="340" y="193" font-family="sans-serif" font-size="11" fill="#633806" text-anchor="middle">Measure resistance &amp; capacity</text><line x1="340" y1="215" x2="340" y2="230" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="190" y="230" width="300" height="34" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="340" y="247" font-family="sans-serif" font-size="12" font-weight="500" fill="#4A1B0C" text-anchor="middle" dominant-baseline="central">Identify type &amp; extent of degradation</text><line x1="340" y1="264" x2="340" y2="280" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><polygon points="340,280 500,330 340,380 180,330" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="330" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" text-anchor="middle" dominant-baseline="central">Cell Condition?</text><polyline points="500,330 580,330 580,390" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrJG)"/><text x="505" y="320" font-family="sans-serif" font-size="10" fill="#0F6E56" font-weight="700">OEM STANDARDS</text><rect x="490" y="390" width="180" height="150" rx="6" fill="#F2F8EE" stroke="#0F6E56" stroke-width="0.5"/><text x="580" y="410" font-family="sans-serif" font-size="11" font-weight="700" fill="#085041" text-anchor="middle">REUSE PATHWAY</text><text x="500" y="435" font-family="sans-serif" font-size="10" fill="#333">- Approve for EV reuse</text><text x="500" y="455" font-family="sans-serif" font-size="10" fill="#333">- Send for reassembly</text><text x="500" y="475" font-family="sans-serif" font-size="10" fill="#333">- Final re-validation</text><text x="500" y="495" font-family="sans-serif" font-size="10" fill="#333">- Generate test report</text><text x="500" y="515" font-family="sans-serif" font-size="10" fill="#333">- Establish warranty</text><polyline points="180,330 100,330 100,390" fill="none" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrApp)"/><text x="95" y="320" font-family="sans-serif" font-size="10" fill="#3C3489" font-weight="700" text-anchor="end">DEGRADED/STABLE</text><rect x="10" y="390" width="180" height="50" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="100" y="410" font-family="sans-serif" font-size="11" font-weight="700" fill="#3C3489" text-anchor="middle">REPURPOSE PATHWAY</text><text x="100" y="428" font-size="9" fill="#3C3489" text-anchor="middle">(Second-life apps)</text><line x1="340" y1="380" x2="340" y2="390" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrJR)"/><text x="345" y="388" font-family="sans-serif" font-size="10" fill="#993C1D" font-weight="700">DAMAGED</text><rect x="250" y="390" width="180" height="50" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="340" y="410" font-family="sans-serif" font-size="11" font-weight="700" fill="#4A1B0C" text-anchor="middle">RECYCLE PATHWAY</text><text x="340" y="428" font-size="9" fill="#4A1B0C" text-anchor="middle">(Material recovery)</text><polyline points="100,440 100,580 340,580" fill="none" stroke="#aaa" stroke-width="1"/><polyline points="340,440 340,580" fill="none" stroke="#aaa" stroke-width="1"/><polyline points="580,540 580,580 340,580" fill="none" stroke="#aaa" stroke-width="1"/><line x1="340" y1="580" x2="340" y2="600" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrJ)"/><rect x="190" y="600" width="300" height="45" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="622" font-family="sans-serif" font-size="12" font-weight="600" fill="#085041" text-anchor="middle">Log deep-dive diagnostic results</text><text x="340" y="635" font-family="sans-serif" font-size="11" fill="#085041" text-anchor="middle">into global AI system</text></svg>';
+
+var svgLeo = '<svg width="100%" viewBox="0 0 680 980" xmlns="http://www.w3.org/2000/svg" style="margin-top:20px; display:block;"><defs><marker id="arrLo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrLoR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><rect x="180" y="10" width="320" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="30" font-family="sans-serif" font-size="12" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Position battery pack in disassembly station</text><line x1="340" y1="50" x2="340" y2="70" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="70" width="320" height="50" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="340" y="88" font-family="sans-serif" font-size="11" font-weight="700" fill="#3C3489" text-anchor="middle">Standard Battery Disassembly Protocol</text><text x="340" y="103" font-family="sans-serif" font-size="10" fill="#3C3489" text-anchor="middle">Install fixtures / Ensure stability</text><line x1="340" y1="120" x2="340" y2="140" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="140" width="320" height="40" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/><text x="340" y="160" font-family="sans-serif" font-size="11" font-weight="500" fill="#0C447C" text-anchor="middle" dominant-baseline="central">Input info &amp; configure robot instructions</text><line x1="340" y1="180" x2="340" y2="200" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="200" width="320" height="40" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="220" font-family="sans-serif" font-size="11" font-weight="500" fill="#633806" text-anchor="middle" dominant-baseline="central">Verify PPE &amp; perform safety confirmation</text><line x1="340" y1="240" x2="340" y2="260" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="260" width="320" height="40" rx="8" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/><text x="340" y="280" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="central">INITIATE ROBOT OPERATION</text><line x1="340" y1="300" x2="340" y2="330" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><polygon points="340,330 480,375 340,420 200,375" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/><text x="340" y="375" font-family="sans-serif" font-size="11" font-weight="600" fill="#633806" text-anchor="middle" dominant-baseline="central">Robot issue detected?</text><polyline points="480,375 560,375 560,430" fill="none" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrLoR)"/><text x="485" y="365" font-family="sans-serif" font-size="10" fill="#993C1D" font-weight="700">YES</text><rect x="460" y="430" width="200" height="120" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/><text x="560" y="450" font-family="sans-serif" font-size="10" font-weight="700" fill="#4A1B0C" text-anchor="middle">MANUAL INTERVENTION</text><text x="470" y="475" font-size="9" fill="#333">- Robot pauses &amp; notifies</text><text x="470" y="490" font-size="9" fill="#333">- Leo inspects issue</text><text x="470" y="505" font-size="9" fill="#333">- Remove obstruction</text><text x="470" y="520" font-size="9" fill="#333">- Approve continuation</text><polyline points="200,375 120,375 120,580 340,580" fill="none" stroke="#aaa" stroke-width="1" stroke-dasharray="4 3"/><text x="130" y="365" font-family="sans-serif" font-size="10" fill="#aaa">NO</text><polyline points="560,550 560,580 340,580" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><line x1="340" y1="580" x2="340" y2="610" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="610" width="320" height="70" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text x="340" y="630" font-family="sans-serif" font-size="11" font-weight="700" fill="#3C3489" text-anchor="middle">LAYER TRANSITION (When Notified)</text><text x="190" y="650" font-size="9" fill="#333">1. Leo removes outer panel</text><text x="190" y="665" font-size="9" fill="#333">2. Clear workspace &amp; signal robot to continue</text><line x1="340" y1="680" x2="340" y2="710" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="710" width="320" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="730" font-family="sans-serif" font-size="11" font-weight="500" fill="#085041" text-anchor="middle" dominant-baseline="central">Remove disassembled modules from station</text><line x1="340" y1="750" x2="340" y2="780" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrLo)"/><rect x="180" y="780" width="320" height="55" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/><text x="340" y="800" font-family="sans-serif" font-size="11" font-weight="700" fill="#085041" text-anchor="middle">Log Session &amp; AI Feedback</text><text x="340" y="815" font-size="10" fill="#085041" text-anchor="middle">Record deviations / Update AI vision models</text></svg>';
+
+var companies = {
+  revgear: {
+    name: 'Remanufacturing di componenti per il settore oil and gas',
+    overviewImg: 'revgear_scenario_main.png',
+    description: '',
+    scenarioTitle: 'How things will work in the crankshaft remanufacturing workshop in 2035 - 2045',
+    scenario: 'By 2045, this environment has become a recognised player in the field of circular manufacturing, with a strong presence in the clean energy sector. This shift began around 2035, when operations started modernizing through automation, digital tools, and AI. In 2035, the workshop environment had already changed significantly. Manual inspections and machining are now supported by the introduction of 3D scanning, AI-assisted digital modeling, and laser cladding systems. Operators are equipped with a digital tag, designed as a convenient keyring attached to their work pants, which serves as a dynamic archive. It tracks machine status, records performed activities, and stores the preferences of the operator about the interface. Alex, the laser cladding operator, activates the tag at the start of a shift and deactivates it at the end. During the day, the tag is automatically detected by nearby machinery, which adjusts user interfaces and system settings to match the profile of the operator. This setup makes shift handovers easier and quicker, as real-time progress data is saved and transferred directly to the incoming technician. During daily operations, the tag also functions as an active alert system. If a machine requires attention, the tag vibrates and audibly signals Alex the specific issue. This allows him to safely perform other tasks while the robot works on the crankshaft, eliminating the need for constant visual monitoring and drastically freeing up valuable time. Furthermore, this ecosystem facilitates interoperability among engineers, technicians, and operators. For instance, data regarding the status of the laser cladding robot and operational history are directly visible to Jordan, the automation engineer. In fact, when a sensor anomaly or robotic malfunction is detected, Jordan is instantly notified, and the system proposes a maintenance window that does not disrupt production. If he accepts the window, Alex is notified; alternatively, Jordan can propose a different time directly to Alex. A similar protocol is used for scheduled robot updates. When a technical issue arises, Jordan can preview the fault remotely using smart safety glasses. Serving as both eye protection and an augmented reality (AR) display, these glasses allow him to visualize a digital twin of the malfunctioning system and analyze the root cause before ever stepping onto the workshop floor. This shortens repair times, ensuring technicians arrive at the machine with a clear, pre-planned strategy. Finally, the data compiled by the tags proves invaluable to Elena, the compliance and materials engineer. For example, when introducing a new powder to the workshop floor, Elena no longer needs to schedule disruptive meetings with operators to find a slot. Instead, she can directly analyze the planned digital workflow and schedule the powder introduction during a natural lull in production.',
+    scenarioImg: 'revgear_scenario_main.png',
+    sbTitle: 'From hands-on repair to human-guided precision: the new component remanufacturing workflow',
+    storyboard: [
+      {
+        isIntro: true,
+        img: 'revgear_future_intro.png',
+        text: 'Entro il 2045, l’azienda in oggetto sarà diventata un attore riconosciuto nel campo del remanufacturing di alberi motore, con una forte presenza nel settore dell’energia. Questa trasformazione inizia nel 2035, quando i processi si modernizzano grazie all’automazione, a nuovi strumenti digitali e all’intelligenza artificiale. Le ispezioni manuali e la lavorazione meccanica sono ora supportate dall’introduzione della scansione 3D tramite robot, dalla modellazione digitale assistita dall’intelligenza artificiale e dai sistemi automatizzati di laser cladding.'
+      }, 
+      {
+        img: 'revgear_sb_01.png',
+        step: '01',
+        text: 'Alex, laser cladding operator, inizia il suo turno attivando il suo Digital Tag, un dispositivo compatto simile a un portachiavi, fissato ai pantaloni da lavoro, che funge da archivio dinamico delle sue attività e delle sue preferenze.'
+      },
+      {
+        img: 'revgear_sb_02.png',
+        step: '02',
+        text: 'Alex si avvicina alla postazione di lavoro, macchinari rilevano automaticamente il Tag tramite sensori di prossimità e adattano immediatamente l’interfaccia uomo-macchina (HMI) alle preferenze visive e linguistiche di Alex.'  
+      },
+      {
+        img: 'revgear_sb_03.png',
+        step: '03',
+        text: 'Mentre il braccio robotico lavora autonomamente su un grande albero motore, Alex può allontanarsi in sicurezza per svolgere altre attività. Quando viene rilevata un’anomalia, il Tag vibra ed emette un segnale acustico per avvisare Alex.'  
+      },
+      {
+        img: 'revgear_sb_04.png',
+        step: '04',
+        text: 'L’anomalia del robot viene immediatamente segnalata anche a Jordan, l’ingegnere dell’automazione. Il sistema rileva un’anomalia non critica e propone automaticamente una finestra di manutenzione ottimale per evitare interruzioni operative al robot'  
+      },
+      {
+        img: 'revgear_sb_05.png',
+        step: '05',
+        text: 'Prima ancora di entrare nell’area produttiva, Jordan indossa gli smart glasses in dotazione per visualizzare un "Digital Twin" del robot ed analizzare la causa principale del malfunzionamento.'  
+      },
+      {
+        img: 'revgear_sb_06.png',
+        step: '06',
+        text: 'Nel frattempo Elena, materials and compliance engineer, lavora sulla necessità di introdurre una nuova tipologia di polvere metallica in produzione. Invece di organizzare riunioni che interrompono il flusso di lavoro, la dashboard di Elena analizza automaticamente il flusso operativo digitale e le suggerisce la pianificazione per testare e lavorare all\'introduzione della nuova polvere durante una naturale fase di rallentamento della produzione.'  
+      },
+      {
+        img: 'revgear_sb_07.png',
+        step: '07',
+        text: 'A fine turno, Alex disattiva il suo tag che trasmette al collega del turno successivo i dati di avanzamento, così la produzione può continuare senza interruzioni.'  
+      }
+    ],
+    personas: ['alex','jordan','elena']
+  },
+  turbinecare: {
+    name: 'Un modello circolare per l\'industria eolica',
+    personas: ['sam','avery'],
+    overviewImg: 'turbinecare_scenario_main.png',
+    description: '',
+    scenarioTitle: 'Come funzioneranno la logistica e la manutenzione eolica tra il 2035 e il 2045',
+    scenario: 'In questa infrastruttura operativa, gli strumenti di monitoraggio avanzati sono pienamente utilizzati. Le dashboard AI aggregano dati in tempo reale da tutti gli impianti, evolvendo verso modelli di manutenzione predittiva. I team coordinano il trasferimento dei componenti e gestiscono iterativamente le variabili del trasporto offshore, utilizzando un’architettura cloud per garantire la continuità operativa.',
+    scenarioImg: 'turbinecare_scenario_main.png',
+    sbTitle: 'Da reattivo a predittivo: un ciclo di servizio delle turbine eoliche più intelligente',
+    storyboard: [
+      {
+        isIntro: true,
+        img: 'turbinecare_future_intro.png',
+        text: 'Entro il 2045, l’industria europea dell’energia si sarà evoluta in un ecosistema maturo e circolare in cui la rigenerazione delle componenti meccaniche delle pale eoliche sarà un’attività centrale. Questa trasformazione è accelerata dalla crescente domanda di manutenzione delle turbine e dal riutilizzo dei componenti, guidata da considerazioni ambientali, efficienza dei costi e supporto normativo.'    
+      },
+      {
+        img: 'turbinecare_sb_01.png',
+        step: '01',
+        text: 'Sam, maintenance engineer, inizia il suo turno consultando una dashboard centralizzata che aggrega dati in tempo reale da più parchi eolici. Il sistema filtra automaticamente i dati dei sensori in ingresso, mostrando e prioritizzando solo le attività più critiche senza sovraccaricare l’operatore.'    
+      },
+      {
+        img: 'turbinecare_sb_02.png',
+        step: '02',
+        text: 'A metà giornata, Sam riceve un avviso: il sistema ha rilevato un’anomalia specifica nel riduttore di turbina di una pala eolica a 3000km di distanza.'    
+      },
+      {
+        img: 'turbinecare_sb_03.png',
+        step: '03',
+        text: 'Sam indossa gli smart glasses per visualizzare un digital twin del riduttore e analizzare in profondità il guasto. L’analisi mostra che non è necessario fermare immediatamente la turbina, quindi Sam pianifica la riparazione tra tre settimane.'    
+      },
+      {
+        img: 'turbinecare_sb_04.png',
+        step: '04',
+        text: 'Nel frattempo, i dati di manutenzione vengono inviati automaticamente ad Avery, logistics analyst, la cui dashboard notifica l’intervento che dovrà avvenire fra tre settimane.'    
+      },
+      {
+        img: 'turbinecare_sb_05.png',
+        step: '05',
+        text: 'Avery coordina con Sam quali componenti possono essere riparati direttamente in loco e quali devono essere spediti alla struttura principale.'
+      },
+      {
+        img: 'turbinecare_sb_06.png',
+        step: '06',
+        text: 'Avery utilizza le raccomandazioni del sistema per sincronizzare l’arrivo dei ricambi, in modo che questi siano già presenti quando i componenti danneggiati raggiungono l’officina per la riparazione.'    
+      },
+      {
+        img: 'turbinecare_sb_07.png',
+        step: '07',
+        text: 'Una volta riparata la turbina, i dati mostrano che è stato risparmiato tempo rispetto al modello corrente di gestione, ridotto l’impatto ambientale e minimizzato anche il tempo di fermo.'    
+      }
+    ],
+  },
+  voltcell: {
+    name: 'Una seconda vita per le batterie dei veicoli elettrici',
+    overviewImg: 'voltcell_scenario_main.png',
+    description: '',
+    scenarioTitle: 'Come funzionerà l’industria delle batterie tra il 2035 e il 2045',
+    scenario: 'Le diagnosi sistematiche vengono eseguite tramite analisi avanzate delle celle delle batterie e triage non distruttivo. Poiché le configurazioni delle batterie si basano sempre più su standard multipiattaforma, servizi automatizzati tramite l\'uso di AI e robot analizzano lo stato di salute delle batterie fino alle singole celle in modo efficiente, mentre i tecnici monitorano eventuali anomalie dai sistemi di sicurezza.',
+    scenarioImg: 'voltcell_scenario_main.png',
+    sbTitle: 'Il futuro del flusso automatizzato di analisi delle batterie',
+    storyboard: [
+      {
+        isIntro: true,
+        img: 'voltcell_future_intro.png',
+        text: 'Entro il 2045, questa azienda è diventata una realtà importante nel campo del testing e della rigenerazione delle batterie per veicoli elettrici. Grazie alla diffusione dei veicoli elettrici, agli incentivi governativi e all’attenzione alle tematiche ambientali, la rigenerazione delle batterie è passata dall’essere un processo di nicchia all’essere uno standard fondamentale dell’economia circolare, supportata da tecnologie standardizzate a livello internazionale. '    
+      },
+      {
+        img: 'voltcell_sb_01.png',
+        step: '01',
+        text: 'Lara, State-of-Health (SOH) test mechanic, riceve una segnalazione di un veicolo guasto a 10km dal centro assistenza dove lavora. Una volta raggiunto il veicolo danneggiato, Lara esegue un test wireless dello stato della batteria direttamente sul luogo del guasto: l’auto deve essere portata al centro assistenza per analisi più approfondite.'    
+      },
+      {
+        img: 'voltcell_sb_02.png',
+        step: '02',
+        text: 'Al centro assistenza, Lara esegue diagnosi avanzate della batteria e scopre un grave squilibrio delle celle che richiede un intervento specialistico.'    
+      },
+      {
+        img: 'voltcell_sb_03.png',
+        step: '03',
+        text: 'Lara incontra il proprietario del veicolo per spiegare che la batteria deve essere inviata a un’officina specializzata per un’analisi più approfondita.'
+      },
+      {
+        img: 'voltcell_sb_04.png',
+        step: '04',
+        text: 'Lara rimuove in sicurezza la batteria, controlla il report generato automaticamente dal sistema e conferma l\'aggiornamento del passaporto digitale con le informazioni della batteria da analizzare.'    
+      },
+      {
+        img: 'voltcell_sb_05.png',
+        step: '05',
+        text: 'Nell’officina specializzata, Leo,  Battery disassembly technician, riceve la batteria, ne analizza la storia digitale e provvede allo smontaggio: il cacciavite robotico smonta la batteria mentre Leo supervisiona.'    
+      },
+      {
+        img: 'voltcell_sb_06.png',
+        step: '06',
+        text: 'Una volta smontata, la batteria viene analizzata da Jan, SOH test technician, che esegue una diagnosi approfondita dello stato di salute sui pacchi della batteria e sulle singole celle, decidendo se le componenti possano essere rigenerate per l’uso nel veicolo, riutilizzate in altri settori o riciclate.'    
+      },
+      {
+        img: 'voltcell_sb_07.png',
+        step: '07',
+        text: 'I test confermano che la batteria può essere riutilizzata. Jan esegue quindi la procedura per la rigenerazione della batteria e poi affida il riassemblaggio a Leo.  La batteria viene validata attraverso un ciclo completo di carica e scarica e viene poi reinviata alla concessionaria.'    
+      },
+      {
+        img: 'voltcell_sb_08.png',
+        step: '08',
+        text: 'I risultati finali vengono caricati automaticamente, viene emessa una nuova garanzia e il proprietario viene informato che il veicolo è pronto per il ritiro.'
+      }
+    ],
+    personas: ['lara','jan','leo']
+  }
+};
+
+var personas = {
+  alex: {
+  name: 'Alex',
+  role: 'laser cladding operator',
+  img: 'alex.png',
+  goal: 'Ripristinare le superfici usurate degli alberi motore utilizzando la tecnologia di laser cladding',
+  tasks: [
+    'Ritirare e leggere l’ordine di riparazione interno',
+    'Utilizzare lo scanner robotico per acquisire la geometria danneggiata',
+    'Definire i parametri di cladding (strati/percorso) ed eseguire simulazioni a schermo',
+    'Supervisionare il robot durante il processo di laser cladding'
+  ],
+  frustrations: [
+    'Possono verificarsi errori durante il controllo manuale di un numero ID fisico',
+    'Deve sempre rimuovere i guanti quando interagisce con l’interfaccia',
+    'Rimanere vigile durante la supervisione della macchina non è sempre facile',
+    'L’analisi della point cloud richiede molta attenzione e formazione'
+  ],
+  skillsOwned: [
+    'Applicare le norme di salute e sicurezza',
+    'Manutenzione di sistemi di produzione additiva',
+    'Monitorare il funzionamento delle macchine',
+    'Utilizzare strumenti di misura di precisione',
+    'Lavorare in sicurezza con macchinari',
+    'Gestire polveri metalliche'
+  ],
+  skillsAcquire: [
+    'Applicare conoscenze base di robotica',
+    'Utilizzare software 3D e CAD',
+    'Interagire con il robot',
+    'Comprendere i dati della point cloud dello scanner 3D',
+    'Verificare il path generato dal tool AI'
+  ],
+  readiness: 0.71,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.33, i: 0.17 },
+    { l: 'Competenze informatiche', c: 0.17, i: 0.50 },
+    { l: 'Lavoro con macchinari', c: 0.83, i: 0.17 },
+    { l: 'Movimentazione e handling', c: 0.50, i: 0.00 }
+  ],
+  scenario: 'Alex inizia il suo turno ritirando l’ordine di riparazione interno per un albero motore specifico: verifica il numero identificativo e analizza i requisiti di ripristino. Una volta controllato, individua l’albero motore sul banco di scansione, posiziona l’end-effector dello scanner sul braccio robotico e lo fissa. Utilizzando l’interfaccia di scansione 3D, avvia il processo di acquisizione delle aree danneggiate. Al termine della scansione, Alex analizza la point cloud, seleziona le aree da rivestire e autorizza la generazione del modello CAD. Con il modello digitale visualizzato, definisce i parametri di cladding, selezionando il numero appropriato di strati e il percorso di deposizione laser. Il sistema elabora la pianificazione del percorso di deposizione, calcolando i movimenti precisi del braccio robotico. Prima di autorizzare la macchina, Alex verifica la traiettoria a schermo per assicurarsi che il robot non presenti collisioni o errori. Soddisfatto della simulazione, prepara l’area fisica di lavoro, avvia il preriscaldamento, controlla l’alimentazione di polvere e gas e infine avvia il programma. Durante l’applicazione del materiale da parte del robot, Alex rimane vigile monitorando il lavoro del robot e i parametri di sistema. Una volta completato il percorso, ispeziona visivamente il pezzo prima che passi alle fases di raffreddamento e rettifica.',
+  diagram: svgAlex
+  },
+  jordan: {
+  name: 'Jordan',
+  role: 'automation engineer',
+  img: 'jordan.png',
+  goal: 'Ottimizzare la precisione del laser cladding robotico e trasformare l’officina da manutenzione correttiva a manutenzione predittiva',
+  tasks: [
+    'Identificare anomalie dei sensori dai cicli robotici precedenti',
+    'Pianificare le attività di manutenzione',
+    'Eseguire test in loco per validare i sensori e risolvere problemi hardware di automazione',
+    'Configurare il robot per nuovi componenti',
+    'Gestire registri e documentazione di manutenzione'
+  ],
+  frustrations: [
+    'Difficile distinguere i falsi positivi del sistema di rilevamento anomalie',
+    'Coordinare le finestre di manutenzione con la produzione può essere complesso',
+    'Dimenticare di compilare completamente la documentazione di manutenzione'
+  ],
+  skillsOwned: [
+    'Gestire registri di manutenzione',
+    'Coordinare con la produzione le finestre di manutenzione',
+    'Risoluzione di problemi tecnici',
+    'Comprendere la programmazione robotica',
+    'Manutenzione predittiva'
+  ],
+  skillsAcquire: [
+    'Progettare componenti per automazione',
+    'Sviluppare procedure di test meccatroniche',
+    'Eseguire programmazione e simulazione robotica',
+    'Configurare sistemi di collaborazione uomo-robot',
+    'Utilizzare software di produzione additiva'
+  ],
+  readiness: 0.30,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.42, i: 0.58 },
+    { l: 'Competenze informative', c: 0.42, i: 0.33 },
+    { l: 'Lavoro con macchinari', c: 0.00, i: 0.17 },
+    { l: 'Uso dei computer', c: 0.00, i: 0.42 }
+  ],
+  scenario: "Jordan inizia il turno accedendo alla dashboard centralizzata di manutenzione per analizzare i dati raccolti dai cicli robotici del giorno precedente. Il sistema segnala un’anomalia nella macchina di scansione 3D: Jordan analizza le tendenze dei dati e decide di intervenire prima che si verifichi un possibile guasto. Dopo aver coordinato delle attività di manutenzione con la produzione, si sposta in officina per risolvere problemi più complicati del robot e dei sistemi di automazione. Utilizza procedure di test meccatroniche, controllando i sensori del braccio robotico e aggiorna le configurazioni di questi. Successivamente si sposta alla stazione di produzione additiva per configurare il sistema per un nuovo modello di albero motore. Con l’uso del tool per la programmazione del robot e la simulazione delle operazioni, esegue un digital twin del processo di cladding per assicurarsi che i nuovi parametri non causino collisioni. Una volta verificata la simulazione, configura il sistema di collaborazione uomo-robot regolando i sensori di sicurezza per consentire il lavoro condiviso tra umano e robot in sicurezza. Conclude gestendo registri e documentazione di manutenzione, registrando calibrazioni dei sensori e aggiornamenti software.",
+  diagram: svgJordan
+},
+  elena: {
+  name: 'Elena',
+  role: 'compliance and materials engineer',
+  img: 'elena.png',
+  goal: 'Orientarsi tra complessi cambiamenti normativi garantendo transizioni dei materiali fluide e l’integrità dei processi',
+  tasks: [
+    'Monitorare le normative sui materiali per garantire la conformità',
+    'Valutare gli impatti ambientali e sulla salute dei nuovi materiali',
+    'Collaborare con i team di ingegneria per selezionare materiali conformi',
+    'Gestire l’integrazione di nuovi prodotti nel programma di produzione'
+  ],
+  frustrations: [
+    'Tensione e stress tra velocità di produzione e tempo necessario per sostituire un materiale',
+    'I nuovi materiali potrebbero non essere accolti positivamente dai tecnici',
+    'L’impatto ambientale dei nuovi materiali non è sempre adeguatamente documentato'
+  ],
+  skillsOwned: [
+    'Sviluppare materiali avanzati',
+    'Sviluppare procedure di test sui materiali',
+    'Garantire il rispetto degli standard industriali',
+    'Gestire certificazioni e audit normativi',
+    'Analizzare difetti di produzione legati ai cambiamenti dei materiali'
+  ],
+  skillsAcquire: [
+    'Monitorare i cambiamenti normativi globali sui materiali',
+    'Valutare materiali alternativi per la conformità',
+    'Sviluppare strategie di transizione dei materiali',
+    'Condurre analisi di gap per la conformità dei processi',
+    'Comunicare i requisiti normativi al personale tecnico'
+  ],
+  readiness: 0.54,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.17, i: 0.33 },
+    { l: 'Competenze informative', c: 0.67, i: 0.33 },
+    { l: 'Competenze gestionali', c: 0.17, i: 0.17 },
+    { l: 'Uso dei computer', c: 0.08, i: 0.00 }
+  ],
+  scenario: "Elena inizia il suo turno accedendo alla dashboard normativa globale per verificare cambiamenti e nuove restrizioni sull’uso delle polveri industriali usate in azienda. Quando identifica un imminente divieto su un material chiave, avvia un’analisi dei gap per confrontare le caratteristiche prestazionali delle alternative conformi. Pianifica un incontro con il suo responsabile per discutere la sostituzione del materiale e valutarne la fattibilità. Dopo l’approvazione, Elena valuta gli impatti ambientali e sulla salute delle alternative, documentando i risultati per garantire il rispetto di rigorosi standard di sicurezza. Dopo aver finalizzato la selezione dei materiali, comunica i nuovi requisiti tecnici e i protocolli di sicurezza al team di ingegneria. Lavora inoltre con gli operatori per valutare le capacità delle macchine rispetto alle nuove proprietà dei materiali, individuando i limiti tecnici delle apparecchiature esistenti. Durante le prove iniziali, monitora la produzione, analizzando i difetti e guidando la riprogrammazione delle macchine. Conclude la giornata documentando l’intera transizione e organizzando i dati per i futuri audit normativi.",
+  diagram: svgElena
+  },
+ sam: {
+  name: 'Sam',
+  role: 'maintenance engineer',
+  img: 'sam.png',
+  goal: 'Prevedere la vita utile residua delle macchine e ridurre al minimo le visite in loco tramite monitoraggio remoto basato su IA',
+  tasks: [
+    'Sviluppare modelli per prevedere la vita utile residua delle macchine',
+    'Monitorare da remoto le apparecchiature tramite dashboard',
+    'Coordinare le attività di manutenzione con clienti e team di disassemblaggio',
+    'Registrare i risultati post-ispezione nel modello di IA'
+  ],
+  frustrations: [
+    'Mantenere alta la concentrazione durante il monitoraggio della dashboard è mentalmente faticoso',
+    'È difficile far capire ai clienti che i componenti vanno riparati prima che il problema sia visibile',
+    'Inserire manualmente i dati post-ispezione è noioso e soggetto a errori'
+  ],
+  skillsOwned: [
+    'Eseguire manutenzione delle macchine',
+    'Risolvere guasti delle apparecchiature',
+    'Fare troubleshooting',
+    'Usare sistemi computerizzati di gestione della manutenzione',
+    'Gestire i tempi di fermo macchina'
+  ],
+  skillsAcquire: [
+    'Monitorare le macchine da remoto',
+    'Utilizzare metodi diagnostici basati su IA'
+  ],
+  readiness: 0.80,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 1.00, i: 0.00 },
+    { l: 'Competenze informative', c: 0.67, i: 0.33 },
+    { l: 'Gestione', c: 1.00, i: 0.00 },
+    { l: 'Lavoro con macchinari', c: 0.33, i: 0.33 }
+  ],
+  scenario: 'Sam inizia il turno consultando la dashboard di monitoraggio lato cliente, che aggrega dati in tempo reale da diversi parchi eolici offshore. Viene rilevata un’anomalia nelle armoniche dell’albero ad alta velocità di un riduttore specifico. Invece di richiedere subito un’ispezione in loco, Sam utilizza metodi di IA per confrontare le firme di vibrazione con modelli storici di guasto. Attraverso il monitoraggio remoto, esegue un’analisi approfondita e determina con alta precisione la vita utile residua del componente. Questo approccio data-driven permette a Sam di confermare che il riduttore non richiede un arresto immediato, ma deve essere programmato per la riparazione entro tre settimane. Sam contatta il cliente per presentare un piano di manutenzione predittiva, poi condivide il report del digital twin con il team di disassemblaggio. Infine registra i dati dell’ispezione nel modello di IA, migliorandone progressivamente la precisione.',
+  diagram: svgSam
+},
+avery: {
+  name: 'Avery',
+  role: 'logistics analyst',
+  img: 'avery.png',
+  goal: 'Ottimizzare il ciclo della logistica inversa e gestire i costi elevati legati alle infrastrutture eoliche offshore',
+  tasks: [
+    'Supervisionare la logistica offshore',
+    'Interfacciarsi con i team logistici in caso di problemi alle turbine offshore',
+    'Identificare colli di bottiglia nelle fasi di pulizia e disassemblaggio',
+    'Coordinarsi con gli ingegneri per la spedizione dei componenti',
+    'Valutare i fattori di rischio della spedizione'
+  ],
+  frustrations: [
+    'Cambiamenti marittimi improvvisi possono invalidare i piani AI delle navi',
+    'Navi heavy-lift specializzate potrebbero non essere disponibili per ritiri regionali',
+    'I ritardi nelle spedizioni possono propagarsi all’intero processo'
+  ],
+  skillsOwned: [
+    'Analizzare strategie di supply chain',
+    'Individuare colli di bottiglia',
+    'Sviluppare piani di efficienza'
+  ],
+  skillsAcquire: [
+    'Gestire la logistica inversa',
+    'Gestire i costi di trasporto',
+    'Gestire le sfide di mercato per infrastrutture offshore'
+  ],
+  readiness: 0.45,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.58, i: 0.00 },
+    { l: 'Competenze informative', c: 0.17, i: 0.17 },
+    { l: 'Gestione', c: 0.21, i: 0.00 },
+    { l: 'Supporto e assistenza', c: 0.17, i: 0.00 }
+  ],
+  scenario: 'Quando una turbina offshore necessita intervento, Avery utilizza una dashboard per coordinarsi con i team di gestione logistica. Il processo è inizialmente gestito da un sistema AI integrato che abbina i dati del componente guasto alla disponibilità di navi con le caratteristiche necessarie per la spedizione dei componenti, sincronizzando il trasporto con altri ritiri regionali per ridurre i costi. Se la soluzione proposta è adeguata, Avery la inoltra al team logistico. Nel frattempo analizza il piano di disassemblaggio per individuare colli di bottiglia nelle fasi di smontaggio del riduttore e di pulizia. Si coordina con gli ingegneri di manutenzione per stabilire quali componenti possono essere riparati in loco e quali devono essere inviati allo stabilimento principale. Valuta anche fattori di rischio come congestione portuale o aumento dei costi del carburante e i requisiti legali per la gestione degli scarti. Quando tutto è pronto, pianifica la riconsegna del componente al cliente e registra tutte le decisioni nel sistema.',
+  diagram: svgAvery
+},
+lara: {
+  name: 'Lara',
+  role: 'SOH test mechanic',
+  img: 'lara.png',
+  goal: 'Eseguire diagnosi avanzate dello State of Health (SoH) sulle batterie EV senza disassemblaggio',
+  tasks: [
+    'Verificare lo stato della batteria',
+    'Eseguire test SoH senza disassemblare la batteria',
+    'Comunicare i risultati al cliente e proporre azioni',
+    'Redigere documentazione per richieste di garanzia'
+  ],
+  frustrations: [
+    'I clienti vogliono la riparazione immediata, difficile gestire le aspettative',
+    'Aggiornare manualmente passaporti digitali e documenti di garanzia richiede tempo'
+  ],
+  skillsOwned: [
+    'Diagnosticare problemi delle batterie EV',
+    'Comunicare risultati dei test SoH'
+  ],
+  skillsAcquire: [
+    'Eseguire test SoH senza disassemblaggio',
+    'Preparare batterie per la rigenerazione',
+    'Applicare norme di sicurezza per batterie EV'
+  ],
+  readiness: 0.40,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.50, i: 0.50 },
+    { l: 'Competenze informative', c: 0.50, i: 0.50 },
+    { l: 'Lavoro con macchinari', c: 0.00, i: 0.50 }
+  ],
+  scenario: 'Lara inizia collegando uno strumento diagnostico per lo SOH ad alto livello a un veicolo con problemi di autonomia. Senza disassemblare il pacco batterie, analizza la resistenza interna e le curve di scarica. Quando il sistema segnala uno squilibrio significativo sotto gli standard di garanzia, comprende che è necessario un intervento esterno. Incontra il proprietario per spiegare la situazione e organizzare il trasporto verso un’officina specializzata. Seguendo le norme di sicurezza ad alta tensione, rimuove fisicamente la batteria dall’auto, genera la documentazione di garanzia e prepara il trasporto sicuro aggiornando il passaporto digitale del pacco.',
+  diagram: svgLara
+},
+jan: {
+  name: 'Jan',
+  role: 'SOH test technician',
+  img: 'jan.png',
+  goal: 'Eseguire diagnosi approfondite dello stato di salute su pacchi batteria disassemblati e celle, decidendo tra rigenerazione, riuso o riciclo',
+  tasks: [
+    'Test SOH approfondito con disassemblaggio batterie e analisi celle',
+    'Determinare il fine vita della batteria',
+    'Eseguire validazione delle batterie rigenerate',
+    'Produrre documentazione tecnica'
+  ],
+  frustrations: [
+    'Le misurazioni non sempre corrispondono a quelle dei meccanici',
+    'Eseguire più test in parallelo causa confusione nei dati',
+    'La documentazione è più noiosa dei test stessi'
+  ],
+  skillsOwned: [
+    'Eseguire test SoH approfonditi con disassemblaggio',
+    'Analizzare celle e pacchi batteria',
+    'Produrre documentazione tecnica'
+  ],
+  skillsAcquire: [
+    'Decidere tra riuso/rigenerazione/riciclo',
+    'Validare batterie rigenerate',
+    'Applicare norme di sicurezza per batterie EV'
+  ],
+  readiness: 0.57,
+  barData: [
+    { l: 'Comunicazione e collaborazione', c: 0.00, i: 0.25 },
+    { l: 'Competenze informative', c: 0.25, i: 0.25 },
+    { l: 'Lavoro con macchinari', c: 0.75, i: 0.25 }
+  ],
+  scenario: 'Jan riceve un lotto di batterie e avvia test approfonditi dopo il disassemblaggio dei moduli. Misura resistenza interna e capacità di scarica a livello di cella per identificare il tipo di degrado. In base ai risultati decide tra riuso (standard OEM), riutilizzo in seconda vita per storage stazionario, o riciclo per recupero materiali. Dopo il riassemblaggio da parte del team di rigenerazione, esegue una validazione finale completa e registra i dati nel modello AI globale.',
+  diagram: svgJan
+},
+leo: {
+  name: 'Leo',
+  role: 'disassembly technician',
+  img: 'leo.png',
+  goal: 'Supervisionare e supportare il disassemblaggio automatizzato dei pacchi batteria EV tramite sistemi robotici',
+  tasks: [
+    'Movimentare le batterie nel laboratorio',
+    'Configurare i parametri del robot di disassemblaggio',
+    'Preparazione fisica del sistema robotico',
+    'Avviare e monitorare il processo',
+    'Registrare risultati e deviazioni',
+    'Rimuovere i moduli disassemblati'
+  ],
+  frustrations: [
+    'Il monitoraggio è ripetitivo e richiede attenzione costante',
+    'I blocchi del robot richiedono sempre intervento umano',
+    'I tempi del robot sono percepiti come lenti rispetto al lavoro manuale'
+  ],
+  skillsOwned: [
+    'Monitorare macchine e robot',
+    'Usare avvitatori robotici',
+    'Applicare procedure di sicurezza batterie',
+    'Gestire disassemblaggio standard',
+    'Usare sistemi di visione robotica',
+    'Validare processi automatizzati',
+    'Manutenzione base robot'
+  ],
+  skillsAcquire: [
+    'Registrare dati di test',
+    'Configurare controlli macchina',
+    'Segnalare deviazioni operative'
+  ],
+  readiness: 0.81,
+  barData: [
+    { l: 'Competenze informative', c: 0.80, i: 0.20 },
+    { l: 'Uso dei computer', c: 0.00, i: 0.10 },
+    { l: 'Movimentazione', c: 0.30, i: 0.00 },
+    { l: 'Lavoro con macchinari', c: 0.20, i: 0.00 }
+  ],
+  scenario: 'Leo inizia posizionando un pacco batteria nella stazione di disassemblaggio. Installa i fissaggi necessari e configura il sistema robotico con il pattern corretto. Dopo i controlli di sicurezza, avvia il robot che identifica automaticamente i punti di vite tramite visione artificiale. Durante il processo, il robot si ferma per una vite danneggiata: Leo interviene manualmente, rimuove l’ostacolo e ripristina il flusso. Una volta completato il disassemblaggio, registra le deviazioni per migliorare il sistema futuro.',
+  diagram: svgLeo
+}
+};
+
+// NAVIGATION
+function goTo(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function openHub(company) {
+  currentCompany = company;
+  var c = companies[company];
+  document.getElementById('hub-breadcrumb').textContent = c.name;
+  
+  var questionPanel = document.getElementById('hub-question-text');
+  if(questionPanel) {
+    questionPanel.textContent = 'Cosa vuoi scoprire su ' + c.name + '?';
+  }
+  
+  goTo('hub');
+}
+
+// Funzione openDiscover con i testi italiani e le immagini specifiche mappate per paragrafo
+function openDiscover() {
+  var c = companies[currentCompany];
+  document.getElementById('discover-breadcrumb').textContent = c.name + ' › Discover';
+  document.getElementById('discover-title').textContent = c.name;
+  
+  var imgStyle = 'display: block; max-width: 100%; height: auto; margin: 24px auto 36px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #dde3ef; background: #fff;';
+  
+  var contentHtml = '';
+
+  // CASO 1: REVGEAR
+  if (currentCompany === 'revgear') {
+    contentHtml = 
+      '<h3>Dal 2035 al 2045: La Rivoluzione del Circular Manufacturing</h3>' +
+      '<p>Entro il 2045, i componenti meccanici industriali come gli alberi motore non saranno più buttati via a fine vita, ma verranno rigenerati. Questa transizione verso la produzione circolare ha inizio intorno al 2035, quando le fabbriche avviano un percorso di modernizzazione integrando nei normali processi produttivi l\'automazione, gli strumenti digitali e l\'intelligenza artificiale.</p>' +
+      '<img src="discover_rivoluzione.png" alt="La Rivoluzione del Circular Manufacturing" style="' + imgStyle + '">' +
+
+      '<h3>Il processo tecnologico di rigenerazione</h3>' +
+      '<p>Nel 2035, le vecchie ispezioni manuali e le lavorazioni meccaniche tradizionali vengono potenziate da tecnologie all\'avanguardia. Il nuovo flusso di lavoro si attiva non appena un componente usurato arriva in fabbrica. Inizialmente, un braccio robotico esegue una scansione 3D del pezzo danneggiato per generare un modello digitale preciso. Successivamente, l\'operatore sfrutta le proprie competenze di progettazione per collaborare con l\'intelligenza artificiale, ottimizzando e correggendo il modello a computer. Infine, un secondo braccio robotico esegue il laser cladding, ripristinando la superficie originale attraverso il deposito di materiale extra solo nelle zone usurate, riducendo così gli sprechi e garantendo un\'altissima qualità.</p>' +
+      '<img src="discover_processo.png" alt="Il processo tecnologico" style="' + imgStyle + '">' +
+
+      '<h3>L\'evoluzione del lavoratore e la formazione</h3>' +
+      '<p>Con l\'aumento dell\'automazione, il ruolo dei tecnici si è evoluto in modo radicale. Il personale non ripara più fisicamente i pezzi, ma si concentra sulla collaborazione con i nuovi strumenti, sulla supervisione dei sistemi digitali, sull\'inserimento dei dati mancanti e sui controlli di qualità.<br>' +
+      'Per supportare questa trasformazione, le aziende hanno investito in programmi di formazione interni incentrati sulla programmazione in linguaggio naturale, sulla diagnostica di sistema e sull\'interazione con l\'IA. Allo stesso tempo, la Scuola Tecnica Regionale ha aggiornato i propri programmi didattici introducendo simulazioni virtuali, così da preparare gli studenti ai flussi di lavoro automatizzati e formare operatori subito qualificati.</p>' +
+      '<img src="discover_formazione.png" alt="Evoluzione e formazione" style="' + imgStyle + '">' +
+
+      '<h3>Le sfide del cambiamento e i fattori umani</h3>' +
+      '<p>La transizione non è stata priva di ostacoli, poiché alcuni lavoratori esperti si sono sentiti inizialmente messi da parte a causa della riduzione delle attività manuali. Per rispondere a questo problema, gli ingegneri hanno concentrato i propri sforzi sul miglioramento delle interfacce delle macchine e dei flussi di lavoro, garantendo che l\'essere umano rimanesse sempre al centro dei processi decisionali e della supervisione dei sistemi.</p>' +
+      '<img src="discover_sfide.png" alt="Le sfide e il fattore umano" style="' + imgStyle + '">' +
+
+      '<h3>Il traguardo del 2045: Sostenibilità e nuovi mercati</h3>' +
+      '<p>Entro il 2045, questo sforzo tecnologico ha guidato il cambio di strategia delle aziende, muovendosi in parallelo con il declino dei combustibili fossili e la crescita degli investimenti nell\'energia pulita. Oggi, queste tecnologie avanzate permettono di offrire servizi di rigenerazione (remanufacturing) anche in settori complessi e fortemente regolamentati, come la produzione di energia nucleare, garantendo sempre il pieno rispetto delle più severe normative ambientali.</p>' +
+      '<img src="discover_traguardo.png" alt="Sostenibilità e traguardo 2045" style="' + imgStyle + '">';
+  } 
+  // CASO 2: TURBINECARE (EOLICO)
+  else if (currentCompany === 'turbinecare') {
+    contentHtml = 
+      '<h3>Il nuovo ecosistema dell\'eolico europeo</h3>' +
+      '<p>Entro il 2045, l’industria europea dell’energia eolica si è trasformata in un ecosistema maturo e circolare, posizionando la rigenerazione (remanufacturing) come pilastro centrale delle proprie attività. Questa evoluzione è stata accelerata nei due decenni precedenti dalla crescente demanda di manutenzione delle turbine e dal riutilizzo dei componenti, una dinamica trainata da ragioni ambientali, efficienza dei costi e un solido supporto normativo.</p>' +
+      '<img src="discover_eolico_ecosistema.png" alt="Il nuovo ecosistema dell\'eolico" style="' + imgStyle + '">' +
+
+      '<h3>Tracciabilità, standard e innovazione tecnologica</h3>' +
+      '<p>In questo scenario, il Passaporto Digitale del Prodotto (DPP) è diventato lo standard di riferimento del settore, garantendo informazioni strutturate e trasparenti sull’intero ciclo di vita dei componenti, compresa la tracciabilità delle parti rigenerate. Parallelamente, gli standard internazionali sviluppati da IEC e ISO integrano formalmente la produzione additiva e las pratiche di riparazione, assicurando la massima qualità per ingranaggi e componenti rigenerati. I progressi tecnologici hanno ulteriormente standardizzato i processi di ripristino, riducendo drasticamente la dipendenza dalle materie prime e dalla produzione di nuovi elementi.</p>' +
+      '<img src="discover_eolico_tecnologia.png" alt="Tracciabilità e standard" style="' + imgStyle + '">' +
+
+      '<h3>Cultura del dato e manutenzione predittiva</h3>' +
+      '<p>Sebbene persista una parziale riluttanza da parte di alcuni operatori nel condividere i dati operativi, le strutture organizzative si sono generalmente evolute per favorire la condivisione delle informazioni e l\'adozione di modelli data-driven. Questo consente oggi di effettuare una manutenzione predittiva basata su dati reali e in tempo reale, abbattendo i tempi di fermo macchina e i costi complessivi del ciclo di vita. La rigenerazione ha così ottenuto un forte sostegno culturale e politico, supportata da normative nazionali che incentivano la riparazione e che hanno generato una rinascita dei lavori specializzati nel settore.</p>' +
+      '<img src="discover_eolico_manutenzione.png" alt="Cultura del dato" style="' + imgStyle + '">' +
+
+      '<h3>Strategie di differenziazione contro la concorrenza</h3>' +
+      '<p>Per rispondere alla forte pressione competitiva dei produttori cinesi, le imprese europee hanno ampliato il proprio raggio d\'azione oltre la semplice produzione e manutenzione, puntando su strategie di innovazione e differenziazione. Oggi queste aziende offrono tecnologie proprietarie esclusive, come sistemi digitali-meccanici integrati e soluzioni avanzate di rivestimento, che garantiscono un vantaggio prestazionale difficilmente replicabile dai concorrenti a basso costo. Tali strategie hanno favorito la transizione verso servizi completi sul ciclo di vita e una maggiore integrazione verticale, proteggendo il posizionamento sul mercato.</p>' +
+      '<img src="discover_eolico_concorrenza.png" alt="Strategie contro la concorrenza" style="' + imgStyle + '">' +
+
+      '<h3>Accettazione sociale e integrazione nella rete elettrica</h3>' +
+      '<p>Sul fronte sociale e infrastrutturale, l’accettazione pubblica dell’energia eolica non è ancora uniforme: le preoccupazioni legate al rumore, all\'uso del territorio e all\'impatto ambientale rimangono dibattute, nonostante gli sforzi collettivi per gestire il dialogo e rafforzare la fiducia delle comunità locali. Al contempo, la capacità della rete elettrica di integrare quote elevate di energia eolica continua a crescere, grazie soprattutto alle nuove soluzioni di accumulo energetico e alle tecnologie di rete intelligente (smart grid).</p>' +
+      '<img src="discover_eolico_rete.png" alt="Accettazione sociale e rete elettrica" style="' + imgStyle + '">' +
+
+      '<h3>L\'espansione in Asia e la riqualificazione delle competenze</h3>' +
+      '<p>Poiché la maggior parte delle nuove installazioni di turbine si è spostata verso l’Asia, in particolare attraverso grandi progetti offshore in Cina e India, i leader europei hanno dovuto riorganizzarsi per affrontare la concorrenza logistica e la vicinanza culturale dei player asiatici emergenti. A questo scopo, sono stati istituiti Centri di Eccellenza Circolare regionali in Asia e sono stati sviluppati efficienti sistemi di logistica inversa per il recupero dei componenti. Questo scenario ha visto la nascita di nuove figure professionali dedicate alla manutenzione in ambienti remoti o complessi, richiedendo una vasta operazione di riqualificazione del personale tecnico e logistico, specialmente nei settori della conformità normativa internazionale, dei trasporti avanzati e delle procedure operative offshore.</p>' +
+      '<img src="discover_eolico_competenze.png" alt="Espansione e competenze" style="' + imgStyle + '">';
+  } 
+  // CASO 3: VOLTCELL (BATTERIE)
+  else if (currentCompany === 'voltcell') {
+    contentHtml = 
+      '<h3>Un pilastro per l\'economia circolare</h3>' +
+      '<p>Entro il 2045, il settore del testing e della rigenerazione delle batterie per veicoli elettrici (EV) è diventato un elemento industriale centrale. Grazie alla diffusione su larga scala della mobilità elettrica, agli incentivi governativi e alle crescenti aspettative ambientali, la rigenerazione delle batterie è passata da processo di nicchia a pilastro fondamentale dell’economia circolare, supportata da tecnologie standardizzate e da una solida cooperazione internazionale.</p>' +
+      '<img src="discover_batterie_pilastro.png" alt="Un pilastro per l\'economia circolare" style="' + imgStyle + '">' +
+
+      '<h3>Il modello Battery-as-a-Service e la gestione predittiva</h3>' +
+      '<p>In risposta alla crescente demanda di soluzioni sostenibili, il mercato si è spostato verso il modello Battery-as-a-Service (BaaS). Le batterie vengono ora noleggiate e gestite tramite piattaforme digitali che consentono un monitoraggio costante e una manutenzione predittiva avanzata. Questo sistema è supportato dall\'intelligenza artificiale, che valuta accuratamente lo stato di salute dei dispositivi, ne prevede i guasti e stabilisce in modo ottimizzato se destinarli a un riutilizzo di seconda vita o direttamente al riciclo.</p>' +
+      '<img src="discover_batterie_baas.png" alt="Il modello Battery-as-a-Service" style="' + imgStyle + '">' +
+
+      '<h3>L\'Industrial Deal europeo e l\'automazione dello smontaggio</h3>' +
+      '<p>Anche le politiche e le regolamentazioni hanno subìto un\'importante evoluzione. Il Green Deal europeo si è trasformato in un più ampio Industrial Deal, mirato a migliorare la competitività dell’Unione Europea e a garantire catene del valore a ciclo chiuso. Tuttavia, mantenere questa competitività nel lungo periodo ha richiesto lo sviluppo di nuove e forti capacità interne a livello comunitario. Un’evoluzione chiave nella rigenerazione delle batterie è stata l’introduzione dello smontaggio autonomo e robotizzato. Questi sistemi sono ormai diffusi e riducono al minimo la necessità di intervento manuale, permettendo ai lavoratori umani di concentrarsi sulla supervisione, sulla gestione delle eccezioni e sul miglioramento continuo dei processi automatici. Questo cambiamento è stato reso possibile da una progressiva standardizzazione di alcuni componenti chiave, che ha facilitato la scalabilità dei processi di disassemblaggio, rigenerazione e recupero dei materiali.</p>' +
+      '<img src="discover_batterie_automazione.png" alt="Automazione dello smontaggio" style="' + imgStyle + '">' +
+
+      '<h3>Catene di approvvigionamento flessibili e decentrate</h3>' +
+      '<p>Le operazioni industriali sono state riorganizzate per rendere le catene di approvvigionamento più flessibili e ridurre i rischi legati a crisi geopolitiche o eventi globali. Per evitare una dipendenza eccessiva da singoli fornitori, gli operatori di rete hanno creato una rete di piccole fabbriche distribuite strategicamente in diverse regioni del mondo, promuovendo un modello di produzione decentrato. Per superare l\'ostacolo di normative locali rigide e talvolta lente, gli sforzi globali si sono concentrati sull’armonizzazione delle politiche tra le diverse giurisdizioni, garantendo così che l’innovazione possa proseguire fluidamente nel rispetto degli obiettivi ambientali. Inoltre, con il progressivo calo dei sussidi statali diretti, sono stati introdotti nuovi strumenti di raccolta fondi tramite prodotti finanziari sostenibili, come i green bond e gli impact investment, supportati da team finanziari ormai esperti nella gestione di progetti sostenibili a lungo termine.</p>' +
+      '<img src="discover_batterie_catena.png" alt="Catene di approvvigionamento" style="' + imgStyle + '">' +
+
+
+      '<h3>Sfide geopolitiche e resilienza futura</h3>' +
+      '<p>Nonostante i grandi progressi, il sistema affronta ancora complesse sfide globali. Il dominio manifatturiero concentrato nelle prime fasi della produzione delle batterie crea continui rischi di dipendenza per l’Europa. Allo stesso tempo, la rapidità dell\'evoluzione tecnologica rischia spesso di superare la capacità di adattamento dei quadri normativi. Per queste ragioni, gli investimenti continui nelle capacità strategiche, la diplomazia regolatoria e lo sviluppo di solidi meccanismi di finanza circolare restano fondamentali per garantire la resilienza del settore a lungo termine.</p>'
+  }
+
+  document.getElementById('discover-content').innerHTML = contentHtml;
+  goTo('discover');
+}
+
+// Funzione openTransition aggiornata per includere la sezione "Scopri gli altri settori" con le immagini reali delle card
+function openTransition() {
+  var c = companies[currentCompany];
+  document.getElementById('transition-breadcrumb').textContent = c.name + ' › Workforce transformation';
+
+  // Update dynamic company overview image assignment
+  var overviewImgEl = document.getElementById('dynamic-overview-img');
+  if(overviewImgEl && c.overviewImg) {
+    overviewImgEl.src = c.overviewImg;
+  }
+
+  // Split out the intro card (without step numbers) from numerical grid steps
+  var introItem = c.storyboard.find(item => item.isIntro);
+  var stepItems = c.storyboard.filter(item => !item.isIntro);
+
+  // Render the intro card full length with image left, text right
+  if(introItem) {
+    document.getElementById('future-storyboard-intro-container').innerHTML = 
+      '<div class="future-storyboard-intro-row">' +
+        '<img src="' + introItem.img + '" alt="Intro Graphic"/>' +
+        '<div class="future-storyboard-intro-text">' + introItem.text + '</div>' +
+      '</div>';
+  } else {
+    document.getElementById('future-storyboard-intro-container').innerHTML = '';
+  }
+
+  // Render Restructured Future Step Cards Horizontally (3 per row)
+  document.getElementById('future-storyboard').innerHTML = stepItems.map(function(s){
+    return '<div class="workflow-step">' +
+      '<img src="'+s.img+'" alt="Storyboard Graphic"/>' +
+      '<div class="workflow-meta">' +
+        '<div class="ws-num future-theme">' + s.step.toString().padStart(2, '0') + '</div>' +
+        '<div class="ws-text">'+s.text+'</div>' +
+      '</div></div>';
+  }).join('');
+
+  document.getElementById('personas-grid').innerHTML = c.personas.map(function(pid){
+    var p = personas[pid];
+    return '<div class="persona-chip" onclick="openPersonaModal(\''+pid+'\')">' +
+      '<img src="' + p.img + '" alt="' + p.name + '"/>' +
+      '<div><div class="pc-name">' + p.name + '</div><div class="pc-role">' + p.role + '</div></div></div>';
+  }).join('');
+
+  // ── cross-settore con le immagini delle card originarie ──
+  var oldCrossLink = document.getElementById('cross-sector-navigation');
+  if(oldCrossLink) oldCrossLink.remove();
+
+  var companyLogos = {
+    revgear: 'revgearsolutions_logo.png',
+    turbinecare: 'turbinecare_logo.png',
+    voltcell: 'voltcell_logo.png'
+  };
+
+  var otherSectorsHtml = Object.keys(companies).filter(function(key) {
+    return key !== currentCompany;
+  }).map(function(key) {
+    var comp = companies[key];
+    var logoImg = companyLogos[key];
+    
+    return '<div class="company-card" style="padding: 20px; flex: 1; min-width: 250px;" onclick="quickSwitchSector(\'' + key + '\')">' +
+             '<div class="logo-wrap" style="min-height: 120px; padding: 12px; margin-bottom: 14px; background: #f4f6f9; border-radius: 10px; width: 100%; display: flex; align-items: center; justify-content: center;">' +
+               '<img src="' + logoImg + '" alt="' + comp.name + '" style="max-width: 100%; height: 80px; object-fit: contain;"/>' +
+             '</div>' +
+             '<div class="cname" style="font-size: 15px; line-height: 1.4; font-weight: 700; color: #1a2340;">' + comp.name + '</div>' +
+           '</div>';
+  }).join('');
+
+  var transitionBody = document.getElementById('transition-body');
+  var crossLinkWrapper = document.createElement('div');
+  crossLinkWrapper.id = 'cross-sector-navigation';
+  crossLinkWrapper.innerHTML = 
+    '<h2 class="section-title" style="margin-top: 60px;">Scopri gli altri settori</h2>' +
+    '<div style="display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap;">' + otherSectorsHtml + '</div>';
+  
+  transitionBody.appendChild(crossLinkWrapper);
+
+  goTo('transition');
+}
+
+// Esegue il salto immediato ri-renderizzando la pagina di transizione
+function quickSwitchSector(companyKey) {
+  currentCompany = companyKey;
+  openTransition();
+}
+
+// LIGHTBOX FUNCTIONALITY
+function zoomImage(imgSrc) {
+  var lightbox = document.getElementById('image-lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = imgSrc;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('image-lightbox') || e.target.classList.contains('lightbox-close')) {
+    document.getElementById('image-lightbox').classList.remove('open');
+    if (!document.getElementById('persona-modal').classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
+  }
+}
+
+// PERSONA MODAL
+function openPersonaModal(pid) {
+  var p = personas[pid];
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-role').textContent = p.role;
+
+  var pct = Math.round(p.readiness * 100);
+  var rad = p.readiness * Math.PI;
+  var cx=100, cy=90, r=70;
+  var nx = cx - r*Math.cos(rad), ny = cy - r*Math.sin(rad);
+
+  var bars = p.barData.map(function(b){
+    return '<div class="bar-row"><div class="bar-label">'+b.l+'</div><div class="bars"><div class="bar-bg">' +
+      '<div class="bar-fill-cur" style="width:'+(b.c*100)+'%"></div>' +
+      '<div class="bar-fill-inc" style="left:'+(b.c*100)+'%;width:'+(b.i*100)+'%"></div>' +
+      '</div></div></div>';
+  }).join('');
+
+  document.getElementById('mtab-profile').innerHTML =
+    '<div class="persona-hero">' +
+    '<img src="'+p.img+'" alt="'+p.name+'"/>' +
+    '<div><div style="font-size:11px;color:#4a7fd4;font-weight:600;margin-bottom:6px;">Goal</div><div style="font-size:14px;color:#333;line-height:1.6;">'+p.goal+'</div></div></div>' +
+    '<div class="two-col">' +
+    '<div class="pcard green"><h3>Tasks</h3><ul>'+p.tasks.map(t=>'<li>'+t+'</li>').join('')+'</ul></div>' +
+    '<div class="pcard green"><h3>Frustrations</h3><ul>'+p.frustrations.map(f=>'<li>'+f+'</li>').join('')+'</ul></div>' +
+    '</div>' +
+    '<div class="two-col">' +
+    '<div class="pcard"><h3>Skills owned</h3><ol>'+p.skillsOwned.map(s=>'<li>'+s+'</li>').join('')+'</ol></div>' +
+    '<div class="pcard"><h3>Skills to acquire</h3><ol>'+p.skillsAcquire.map(s=>'<li>'+s+'</li>').join('')+'</ol></div>' +
+    '</div>' +
+    '<div class="two-col">' +
+    '<div class="pcard" style="text-align:center"><h3>Skills readiness</h3>' +
+    '<div class="gauge-wrap"><svg viewBox="0 0 200 110" width="200">' +
+    '<defs><linearGradient id="grd" x1="0%" y1="0%" x2="100%" y2="0%">' +
+    '<stop offset="0%" style="stop-color:#e74c3c"/><stop offset="40%" style="stop-color:#f1c40f"/><stop offset="100%" style="stop-color:#2ecc71"/>' +
+    '</linearGradient></defs>' +
+    '<path d="M30,90 A70,70 0 0,1 170,90" fill="none" stroke="url(#grd)" stroke-width="16" stroke-linecap="round"/>' +
+    '<line x1="'+cx+'" y1="'+cy+'" x2="'+nx.toFixed(2)+'" y2="'+ny.toFixed(2)+'" stroke="#1a2340" stroke-width="3" stroke-linecap="round"/>' +
+    '<circle cx="'+cx+'" cy="90" r="5" fill="#1a2340"/>' +
+    '<text x="28" y="108" font-size="10" fill="#888">0</text><text x="165" y="108" font-size="10" fill="#888">1.0</text>' +
+    '</svg><div class="gauge-label">'+pct+'% skills owned</div></div></div>' +
+    '<div class="pcard"><h3>Skills by category</h3>' +
+    '<div class="legend"><div class="leg"><div class="leg-dot" style="background:#5a8a2e"></div>Current</div>' +
+    '<div class="leg"><div class="leg-dot" style="background:#a8cc70"></div>To acquire</div></div>' +
+    '<div class="bar-chart">'+bars+'</div></div>' +
+    '</div>';
+
+  var scenarioHtml = '<h3 style="font-size:18px;font-weight:700;color:#1a2340;margin-bottom:16px;">A day at work with ' + p.name + '</h3>' +
+    '<div class="scenario-text">' + p.scenario + '</div>';
+    
+  if (p.diagram) {
+    scenarioHtml += '<div style="margin-top:32px; border-top:1px solid #dde3ef; padding-top:24px;">' +
+      '<h4 style="font-size:15px; font-weight:700; color:#1a2340; margin-bottom:16px;">The day at a glance (Operational Flow)</h4>' +
+      p.diagram + '</div>';
+  }
+
+  document.getElementById('mtab-scenario').innerHTML = scenarioHtml;
+
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.modal-tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.mtab')[0].classList.add('active');
+  document.getElementById('mtab-profile').classList.add('active');
+  document.getElementById('persona-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// MODAL CONTROLS
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('persona-modal')) {
+    document.getElementById('persona-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function switchMTab(tabId, btn) {
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.modal-tab-content').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+</script>
+</body>
+</html>

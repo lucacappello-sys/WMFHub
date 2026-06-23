@@ -1,0 +1,12 @@
+{
+  "name": "wmf-launcher",
+  "version": "1.0.0",
+  "description": "WMF 2026 launcher hub",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
